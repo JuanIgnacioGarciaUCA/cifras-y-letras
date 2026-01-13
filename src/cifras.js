@@ -41,11 +41,11 @@ function resolver(objetivo, numeros) {
     }
   }
   
-
   probarCombinaciones(numeros, '');
 
   return mejorSolucion;
 }
+
 export class CifrasGame {
   constructor() {
     this.numerosDisponibles = [
