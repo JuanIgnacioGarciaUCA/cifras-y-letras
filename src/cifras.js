@@ -40,6 +40,7 @@ function resolver(objetivo, numeros) {
       }
     }
   }
+  
 
   probarCombinaciones(numeros, '');
 
