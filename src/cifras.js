@@ -46,6 +46,7 @@ function resolver(objetivo, numeros) {
   return mejorSolucion;
 }
 
+
 export class CifrasGame {
   constructor() {
     this.numerosDisponibles = [
