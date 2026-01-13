@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <title>Cifras-y-Letras</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>Cifras y Letras</h1>
+    </header>
+
+    <main class="game-container">
+
+      <section id="cifras-section" class="section">
+        <h2>Cifras</h2>
+        <div class="cifras-container" id="cifras-id">
+          <div id="objetivo" class="target-number">---</div>
+          <div id="numeros-lista" class="numbers-grid">..</div>
+          <div class="input-area">
+            <input type="text" id="operacion" placeholder="Ej: (50+2)*4">
+            <button id="btn-comprobar">Comprobar</button>
+          </div>
+          <p id="resultado-msg"></p>
+          <button id="btn-nuevo-juego-cifras" class="new-game-button">Nuevo Juego</button>
+        </div>
+      </section>
+
+      <section id="letras-section" class="section">
+        <h2>Letras</h2>
+        <div class="letras-container">
+          <div id="letras-seleccionadas" class="letras-seleccionadas"></div>
+          <div class="letras-botones">
+            <button id="btn-pedir-letra">Pedir Letra</button>
+            <button id="btn-nuevo-juego-letras" class="new-game-button">Nuevo Juego</button>
+          </div>
+          <div class="input-area">
+            <input type="text" id="palabra-usuario" placeholder="Introduce tu palabra">
+            <button id="btn-comprobar-palabra">Comprobar</button>
+          </div>
+          <p id="resultado-letras-msg"></p>
+        </div>
+      </section>
+      
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Cifras y Letras</p>
+    </footer>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
