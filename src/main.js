@@ -1,14 +1,50 @@
 // src/main.js
 import { CifrasGame } from './cifras.js';
+import { generarLetrasAleatorias } from './letras.js';
 
 const app = document.querySelector('#app');
 let mode = 'Letras';
 const letrasSection = document.getElementById('letras-section');
 const cifrasSection = document.getElementById('cifras-section');
-//const cifrasSectionElement = document.querySelector('.cifras-section');
-
 cifrasSection.style.display = 'none';
 
+// botón pedir letras
+const pedirletras = document.getElementById('btn-pedir-letra');
+pedirletras.disabled=true;
+const numvocales = document.getElementById('numvocales');
+numvocales.addEventListener('change', () => {
+  console.log("numvocales="+numvocales.value);
+  pedirletras.disabled=false;
+});
+pedirletras.addEventListener('click', () => {
+  let ll=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
+  console.log("letras=",ll);
+  for(let i=1;i<=10;i++){
+    let letrai=document.getElementById("l"+i);
+    letrai.value=ll[i-1];
+  }
+});
+
+
+// botón de modo de juego
+const modeButton = document.getElementById('mode-button');
+
+modeButton.addEventListener('click', () => {
+  if (mode === 'Letras') {
+    mode = 'Cifras';
+    letrasSection.style.display = 'none';
+    cifrasSection.style.display = 'block';
+    modeButton.textContent = 'Cambiar a Letras';
+  } else {
+    mode = 'Letras';
+    letrasSection.style.display = 'block';
+    cifrasSection.style.display = 'none';
+    modeButton.textContent = 'Cambiar a Cifras';
+  }
+});
+
+
+/*
 let cifrasGame = new CifrasGame();
 
 const generateButton = document.getElementById('nuevoJuego');
@@ -55,21 +91,4 @@ checkButton.addEventListener('click', () => {
 if (cifrasSection) {
     cifrasSection.appendChild(checkButton);
 }*/
-
-const modeButton = document.getElementById('mode-button');
-modeButton.textContent = 'Cambiar a Cifras';
-
-modeButton.addEventListener('click', () => {
-  if (mode === 'Letras') {
-    mode = 'Cifras';
-    letrasSection.style.display = 'none';
-    cifrasSection.style.display = 'block';
-    modeButton.textContent = 'Cambiar a Letras';
-  } else {
-    mode = 'Letras';
-    letrasSection.style.display = 'block';
-    cifrasSection.style.display = 'none';
-    modeButton.textContent = 'Cambiar a Cifras';
-  }
-});
 

@@ -4,9 +4,9 @@
  * @param {number} numConsonantes - El número de consonantes a generar.
  * @returns {string[]} Un array de letras aleatorias.
  */
-function generarLetrasAleatorias(numVocales, numConsonantes) {
+export function generarLetrasAleatorias(numVocales, numConsonantes) {
   const vocales = ['a', 'e', 'i', 'o', 'u'];
-  const consonantes = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
+  const consonantes = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
   const letras = [];
 
   for (let i = 0; i < numVocales; i++) {
@@ -28,9 +28,19 @@ function generarLetrasAleatorias(numVocales, numConsonantes) {
  * @param {string} palabra - La palabra a verificar.
  * @returns {boolean} True si la palabra existe, false de lo contrario.
  */
-function verificarPalabra(palabra) {
+
+const fs = require("fs");
+const contenido = fs.readFileSync("es.txt", "utf8");
+// separar por líneas y eliminar líneas vacías
+const diccionario = contenido
+  .split(/\r?\n/)
+  .filter(palabra => palabra.trim() !== "");
+
+//console.log(lista);
+
+export function verificarPalabra(palabra) {
   // Mock de diccionario (reemplazar con una API real)
-  const diccionario = ['hola', 'mundo', 'javascript', 'casa', 'perro'];
+  //const diccionario = ['hola', 'mundo', 'javascript', 'casa', 'perro'];
   return diccionario.includes(palabra);
 
   // O, para usar una API, podrías usar algo como:

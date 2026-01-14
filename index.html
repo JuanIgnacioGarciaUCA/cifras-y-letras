@@ -3,56 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="icon" type="image/svg+xml" href="/vite.svg">
     <title>Cifras-y-Letras</title>
-    <link rel="stylesheet" href="./src/style.css">
+    
 </head>
 
-<body>
-  <div id="app">
-    <header>
-      <h1>Cifras y Letras</h1>
-    </header>
+<body class="w3-container w3-gray">
+  <h1>Cifras y Letras</h1>
+  <main class="w3-container w3-border w3-white w3-round-large">
 
-    <main class="game-container">
+    <section id="cifras-section" class="w3-panel">
+      <h2>Cifras</h2>
+      <div class="cifras-container" id="cifras-id">
+        <div id="objetivo" class="objetivoCSS">---</div>
+        <div id="numeros-lista" class="contenedor">..</div>
+        <input class="w3-input" type="text" id="operacion" placeholder="Ej: (50+2)*4">
+        <p id="resultado-msg"></p>
+      </div>
+    </section>
 
-      <section id="cifras-section" class="section">
-        <h2>Cifras</h2>
-        <div class="cifras-container" id="cifras-id">
-          <div id="objetivo" class="target-number">---</div>
-          <div id="numeros-lista" class="contenedor">..</div>
-          <div class="input-area">
-            <input type="text" id="operacion" placeholder="Ej: (50+2)*4">
-            <br>
-            <button id="btn-comprobar">Comprobar</button>
-            <button id="btn-resolver">Resolver</button>
-          </div>
-          <p id="resultado-msg"></p>
+    <section id="letras-section" class="w3-panel">
+      <h2>Letras</h2>
+      <select class="w3-select" id="numvocales">
+        <option value="" disabled selected>Número de vocales</option>
+        <option value="1">1 vocal</option>
+        <option value="2">2 vocales</option>
+        <option value="3">3 vocales</option>
+        <option value="4">4 vocales</option>
+        <option value="5">5 vocales</option>
+        <option value="6">6 vocales</option>
+        <option value="7">7 vocales</option>
+        <option value="8">8 vocales</option>
+        <option value="9">9 vocales</option>
+        <option value="10">10 vocales</option>
+      </select>
+      <p>
+      <div class="w3-row">
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l1" >
         </div>
-      </section>
-
-      <section id="letras-section" class="section">
-        <h2>Letras</h2>
-        <div class="letras-container">
-          <div id="letras-seleccionadas" class="letras-seleccionadas"></div>
-          <div class="letras-botones">
-            <button id="btn-pedir-letra">Pedir Letra</button>
-          </div>
-          <div class="input-area">
-            <input type="text" id="palabra-usuario" placeholder="Introduce tu palabra">
-            <button id="btn-comprobar-palabra">Comprobar</button>
-          </div>
-          <p id="resultado-letras-msg"></p>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l2">
         </div>
-      </section>
-      
-    </main>
-    <button id="mode-button">Cambiar a Cifras</button>
-    <button id="nuevoJuego">Nuevo Juego</button>
-    <footer>
-      <p>&copy; 2026 Cifras y Letras</p>
-    </footer>
-  </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l3">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l4">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l5">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l6">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l7">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l8">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l9">
+        </div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l10">
+        </div>
+      </div>   
+      <p>   
+      <button id="btn-pedir-letra" class="w3-btn w3-border">Pedir Letras</button>   
+      <p>
+
+      <div class="w3-row">
+        <div class="w3-col" style="width: 85%;">
+          <input id="palabrausuario" class="w3-input" type="text" placeholder="Introduce aquí tu palabra">
+        </div>
+        <div class="w3-col" style="width: 15%;" id="resultadopalabra">
+          <button id="comprobarpalabra" class="w3-btn w3-border w3-round w3-shadow">
+            &#x2705;&#x274C;
+          </button>   
+        </div>
+      </div>
+      <p>
+      <input class="w3-input w3-border" id="palabrasolucion" placeholder="Pulse aquí para posible solución">
+      <p></p>
+      <button class="w3-btn w3-border w3-white" id="btn-nuevoJuego">Nuevo Juego</button>
+    </section>
+
+  </main>
+  <p>
+  <button class="w3-btn w3-border w3-white" id="mode-button">Cambiar a Cifras</button>
+  <footer>
+    <p>&copy; 2026 Cifras y Letras</p>
+  </footer>
+  
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>
