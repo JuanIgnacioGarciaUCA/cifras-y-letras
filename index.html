@@ -20,13 +20,14 @@
         <h2>Cifras</h2>
         <div class="cifras-container" id="cifras-id">
           <div id="objetivo" class="target-number">---</div>
-          <div id="numeros-lista" class="numbers-grid">..</div>
+          <div id="numeros-lista" class="contenedor">..</div>
           <div class="input-area">
             <input type="text" id="operacion" placeholder="Ej: (50+2)*4">
+            <br>
             <button id="btn-comprobar">Comprobar</button>
+            <button id="btn-resolver">Resolver</button>
           </div>
           <p id="resultado-msg"></p>
-          <button id="btn-nuevo-juego-cifras" class="new-game-button">Nuevo Juego</button>
         </div>
       </section>
 
@@ -36,7 +37,6 @@
           <div id="letras-seleccionadas" class="letras-seleccionadas"></div>
           <div class="letras-botones">
             <button id="btn-pedir-letra">Pedir Letra</button>
-            <button id="btn-nuevo-juego-letras" class="new-game-button">Nuevo Juego</button>
           </div>
           <div class="input-area">
             <input type="text" id="palabra-usuario" placeholder="Introduce tu palabra">
@@ -47,7 +47,8 @@
       </section>
       
     </main>
-
+    <button id="mode-button">Cambiar a Cifras</button>
+    <button id="nuevoJuego">Nuevo Juego</button>
     <footer>
       <p>&copy; 2026 Cifras y Letras</p>
     </footer>

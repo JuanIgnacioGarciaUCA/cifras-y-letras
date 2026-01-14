@@ -3,34 +3,35 @@ import { CifrasGame } from './cifras.js';
 
 const app = document.querySelector('#app');
 let mode = 'Letras';
-const letrasSection = document.querySelector('.letras-container');
-const cifrasSection = document.querySelector('.cifras-container');
-const cifrasSectionElement = document.querySelector('.cifras-section');
+const letrasSection = document.getElementById('letras-section');
+const cifrasSection = document.getElementById('cifras-section');
+//const cifrasSectionElement = document.querySelector('.cifras-section');
 
 cifrasSection.style.display = 'none';
 
 let cifrasGame = new CifrasGame();
 
-const generateButton = document.createElement('button');
-generateButton.textContent = 'Nuevo Juego';
+const generateButton = document.getElementById('nuevoJuego');
 generateButton.addEventListener('click', () => {
   cifrasGame.newGame();
   const numbers = cifrasGame.getNumbers();
   const target = cifrasGame.getTarget();
 
   const numbersContainer = document.querySelector('#numeros-lista');
+  numbersContainer.className='contenedor';
   numbersContainer.innerHTML = '';
   numbers.forEach(number => {
     const numberElement = document.createElement('div');
+    numberElement.className='caja';
     numberElement.textContent = number;
     numbersContainer.appendChild(numberElement);
   });
 
   document.querySelector('#objetivo').textContent = target;
-  document.querySelector('#cifras-input').value = '';
+  document.getElementById('operacion').value = '';
 });
 
-cifrasSection.appendChild(generateButton);
+
 const checkButton = document.createElement('button');
 checkButton.textContent = 'Comprobar';
 checkButton.addEventListener('click', () => {
@@ -50,11 +51,12 @@ checkButton.addEventListener('click', () => {
   }
 });
 
-if (cifrasSectionElement) {
-    cifrasSectionElement.appendChild(checkButton);
-}
-const modeButton = document.createElement('button');
-modeButton.id = 'mode-button';
+/*
+if (cifrasSection) {
+    cifrasSection.appendChild(checkButton);
+}*/
+
+const modeButton = document.getElementById('mode-button');
 modeButton.textContent = 'Cambiar a Cifras';
 
 modeButton.addEventListener('click', () => {
@@ -71,4 +73,3 @@ modeButton.addEventListener('click', () => {
   }
 });
 
-app.appendChild(modeButton);

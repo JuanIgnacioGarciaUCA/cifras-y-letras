@@ -13,6 +13,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+numbers-grid{
+  display: inline-block;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.contenedor {
+  display: flex; /* Activa Flexbox */
+  justify-content: center; /* Centra los divs horizontalmente */
+  /* align-items: center;  Opcional: para centrar verticalmente */
+}
+
+.caja {
+  /* Estilos para tus divs */
+  width: 5%;
+  height: 10%;
+  margin: 5px;
+  background-color: lightblue;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
