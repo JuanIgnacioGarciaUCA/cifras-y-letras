@@ -1,6 +1,6 @@
 // src/main.js
 import { CifrasGame } from './cifras.js';
-import { generarLetrasAleatorias } from './letras.js';
+import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } from './letras.js';
 
 const app = document.querySelector('#app');
 let mode = 'Letras';
@@ -8,45 +8,14 @@ const letrasSection = document.getElementById('letras-section');
 const cifrasSection = document.getElementById('cifras-section');
 cifrasSection.style.display = 'none';
 
-// botón comprobar palabra
-const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
-comprobarPalabraBtn.addEventListener('click', () => {
-  const palabraInput = document.getElementById('palabrausuario');
-  const palabra = palabraInput.value.trim().toLowerCase();
-
-
-  import('./letras.js').then(({ verificarPalabra }) => {
-    const existe = verificarPalabra(palabra);
-    if (existe) {
-      console.log( `La palabra "${palabra}" existe en el diccionario.` );
-    } else {
-      console.log( `La palabra "${palabra}" NO existe en el diccionario.` );
-    }
-  });
-});
-
-
-// botón pedir letras
+const modeButton = document.getElementById('mode-button');
+const palabraInput = document.getElementById('palabrausuario');
 const pedirletras = document.getElementById('btn-pedir-letra');
-pedirletras.disabled=true;
 const numvocales = document.getElementById('numvocales');
-numvocales.addEventListener('change', () => {
-  console.log("numvocales="+numvocales.value);
-  pedirletras.disabled=false;
-});
-pedirletras.addEventListener('click', () => {
-  let ll=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
-  console.log("letras=",ll);
-  for(let i=1;i<=10;i++){
-    let letrai=document.getElementById("l"+i);
-    letrai.value=ll[i-1];
-  }
-});
-
+const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
+const palabrasolucion=document.getElementById("palabrasolucion");
 
 // botón de modo de juego
-const modeButton = document.getElementById('mode-button');
-
 modeButton.addEventListener('click', () => {
   if (mode === 'Letras') {
     mode = 'Cifras';
@@ -60,6 +29,62 @@ modeButton.addEventListener('click', () => {
     modeButton.textContent = 'Cambiar a Cifras';
   }
 });
+
+
+// botón pedir letras
+pedirletras.disabled=true;
+
+numvocales.addEventListener('change', () => {
+  console.log("numvocales="+numvocales.value);
+  pedirletras.disabled=false;
+  palabraInput.value='';
+  palabrasolucion.value='';
+  for(let i=1;i<=10;i++){
+    let letrai=document.getElementById("l"+i);
+    letrai.value='_';
+  }
+});
+
+let letras;
+pedirletras.addEventListener('click', () => {
+  palabraInput.value='';
+  palabrasolucion.value='';
+  letras=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
+  console.log("letras=",letras);
+  for(let i=1;i<=10;i++){
+    let letrai=document.getElementById("l"+i);
+    letrai.value=letras[i-1];
+  }
+});
+
+// botón comprobar palabra
+comprobarPalabraBtn.addEventListener('click', () => {
+  const palabra = palabraInput.value.trim().toLowerCase();
+
+  import('./letras.js').then(({ verificarPalabra }) => {
+    const existe = esPalabraValida(palabra,letras);
+    if (existe) {
+      console.log( `La palabra "${palabra}" existe en el diccionario.` );
+      comprobarPalabraBtn.innerHTML=`<a href='https://dle.rae.es/${palabra}'>&#x2705;</a>`;
+    } else {
+      console.log( `La palabra "${palabra}" NO es correcta.` );
+      comprobarPalabraBtn.innerHTML="&#x274C;";
+    }
+  });
+});
+
+// botón encontrar palabra más larga
+palabrasolucion.addEventListener('click', () => {
+  import('./letras.js').then(({ verificarPalabra }) => {
+    const propuesta=encontrarPalabraMasLarga(letras);
+    if(propuesta!=null){
+      palabrasolucion.innerHTML=`<a href="https://dle.rae.es/${propuesta}">${propuesta}</a>`;
+    }else{
+      palabrasolucion.value="no hay propuesta";
+    }
+  });
+});
+
 
 
 /*
