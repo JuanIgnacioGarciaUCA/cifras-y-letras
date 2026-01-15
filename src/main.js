@@ -8,6 +8,24 @@ const letrasSection = document.getElementById('letras-section');
 const cifrasSection = document.getElementById('cifras-section');
 cifrasSection.style.display = 'none';
 
+// botón comprobar palabra
+const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
+comprobarPalabraBtn.addEventListener('click', () => {
+  const palabraInput = document.getElementById('palabrausuario');
+  const palabra = palabraInput.value.trim().toLowerCase();
+
+
+  import('./letras.js').then(({ verificarPalabra }) => {
+    const existe = verificarPalabra(palabra);
+    if (existe) {
+      console.log( `La palabra "${palabra}" existe en el diccionario.` );
+    } else {
+      console.log( `La palabra "${palabra}" NO existe en el diccionario.` );
+    }
+  });
+});
+
+
 // botón pedir letras
 const pedirletras = document.getElementById('btn-pedir-letra');
 pedirletras.disabled=true;

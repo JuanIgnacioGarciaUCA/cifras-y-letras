@@ -29,12 +29,7 @@ export function generarLetrasAleatorias(numVocales, numConsonantes) {
  * @returns {boolean} True si la palabra existe, false de lo contrario.
  */
 
-const fs = require("fs");
-const contenido = fs.readFileSync("es.txt", "utf8");
-// separar por líneas y eliminar líneas vacías
-const diccionario = contenido
-  .split(/\r?\n/)
-  .filter(palabra => palabra.trim() !== "");
+import { diccionario } from "./es_txt.js";
 
 //console.log(lista);
 
