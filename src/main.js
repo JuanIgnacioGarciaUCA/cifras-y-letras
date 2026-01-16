@@ -38,7 +38,7 @@ numvocales.addEventListener('change', () => {
   console.log("numvocales="+numvocales.value);
   pedirletras.disabled=false;
   palabraInput.value='';
-  palabrasolucion.value='';
+  palabrasolucion.innerHTML='Pulse aquí para posible solución';
   for(let i=1;i<=10;i++){
     let letrai=document.getElementById("l"+i);
     letrai.value='_';
@@ -48,12 +48,12 @@ numvocales.addEventListener('change', () => {
 let letras;
 pedirletras.addEventListener('click', () => {
   palabraInput.value='';
-  palabrasolucion.value='';
+  palabrasolucion.innerHTML='Pulse aquí para posible solución';
   letras=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
   console.log("letras=",letras);
   for(let i=1;i<=10;i++){
     let letrai=document.getElementById("l"+i);
-    letrai.value=letras[i-1];
+    letrai.innerHTML="<center><b>"+letras[i-1].toUpperCase()+"</b></center>";
   }
 });
 

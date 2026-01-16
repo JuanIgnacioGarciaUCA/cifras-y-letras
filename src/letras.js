@@ -5,22 +5,56 @@
  * @returns {string[]} Un array de letras aleatorias.
  */
 export function generarLetrasAleatorias(numVocales, numConsonantes) {
-  const vocales = ['a', 'e', 'i', 'o', 'u'];
-  const consonantes = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
-  const letras = [];
+    const letras = [];
+  
+    const frecuenciaVocales = {
+        "e": 30.35,
+        "a": 27.80,
+        "o": 19.26,
+        "i": 13.87,
+        "u": 8.72
+    };
 
-  for (let i = 0; i < numVocales; i++) {
-    letras.push(vocales[Math.floor(Math.random() * vocales.length)]);
-  }
+    const frecuenciaConsonantes = {
+        "s": 14.53, "r": 12.51, "n": 12.22, "d": 10.67, "l": 9.05,
+        "c": 8.52, "t": 8.43, "m": 5.73, "p": 4.57, "b": 2.58,
+        "g": 1.84, "v": 1.64, "y": 1.64, "q": 1.60, "h": 1.27,
+        "f": 1.26, "z": 0.95, "j": 0.80, "ñ": 0.56, "x": 0.40,
+        "k": 0.04, "w": 0.02
+    };
 
-  for (let i = 0; i < numConsonantes; i++) {
-    letras.push(consonantes[Math.floor(Math.random() * consonantes.length)]);
-  }
+    // Función interna para elegir una letra basada en su peso
+    const elegirLetraPorPeso = (diccionario) => {
+        const random = Math.random() * 100;
+        let acumulado = 0;
 
-  // Mezclar el array para que no estén todas las vocales primero y luego las consonantes
-  letras.sort(() => Math.random() - 0.5);
+        for (const [letra, porcentaje] of Object.entries(diccionario)) {
+            acumulado += porcentaje;
+            if (random <= acumulado) {
+                return letra;
+            }
+        }
+        // Retorno de seguridad (última letra del diccionario)
+        return Object.keys(diccionario)[Object.keys(diccionario).length - 1];
+    };
 
-  return letras;
+    // Generar vocales ponderadas
+    for (let i = 0; i < numVocales; i++) {
+        letras.push(elegirLetraPorPeso(frecuenciaVocales));
+    }
+
+    // Generar consonantes ponderadas
+    for (let i = 0; i < numConsonantes; i++) {
+        letras.push(elegirLetraPorPeso(frecuenciaConsonantes));
+    }
+
+    // Mezclar el array (Algoritmo Fisher-Yates para una mezcla más eficiente)
+    for (let i = letras.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [letras[i], letras[j]] = [letras[j], letras[i]];
+    }
+
+    return letras;
 }
 
 /**
@@ -100,6 +134,7 @@ export function encontrarPalabraMasLarga(letras) {
     
     // Recorremos el diccionario. 
     // Al estar ordenado por longitud, el primer éxito es el ganador.
+    console.log("buscando en diccionario...");
     for (const palabra of diccionario) {
         if (sePuedeFormar(palabra, letras)) {
             return palabra; 
