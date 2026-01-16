@@ -10,7 +10,7 @@ letrasSection.style.display = 'none';
 
 const modeButton = document.getElementById('mode-button');
 const palabraInput = document.getElementById('palabrausuario');
-const pedirletras = document.getElementById('btn-pedir-letra');
+const nuevasLetras = document.getElementById('nuevasLetras');
 const numvocales = document.getElementById('numvocales');
 const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
 const palabrasolucion=document.getElementById("palabrasolucion");
@@ -32,11 +32,10 @@ modeButton.addEventListener('click', () => {
 
 
 // botón pedir letras
-pedirletras.disabled=true;
-
+nuevasLetras.disabled=true;
 numvocales.addEventListener('change', () => {
   console.log("numvocales="+numvocales.value);
-  pedirletras.disabled=false;
+  nuevasLetras.disabled=false;
   palabraInput.value='';
   palabrasolucion.innerHTML='Pulse aquí para posible solución';
   for(let i=1;i<=10;i++){
@@ -45,8 +44,9 @@ numvocales.addEventListener('change', () => {
   }
 });
 
+// nuevo juego letras
 let letras;
-pedirletras.addEventListener('click', () => {
+nuevasLetras.addEventListener('click', () => {
   palabraInput.value='';
   palabrasolucion.innerHTML='Pulse aquí para posible solución';
   letras=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
@@ -60,7 +60,6 @@ pedirletras.addEventListener('click', () => {
 // botón comprobar palabra
 comprobarPalabraBtn.addEventListener('click', () => {
   const palabra = palabraInput.value.trim().toLowerCase();
-
   import('./letras.js').then(({ verificarPalabra }) => {
     const existe = esPalabraValida(palabra,letras);
     if (existe) {
@@ -87,11 +86,28 @@ palabrasolucion.addEventListener('click', () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+///////////////
+// Cifras game
+///////////////
+
 const nuevascifras = document.getElementById('nuevascifras');
 
 let cifrasGame=new CifrasGame();
 
 nuevascifras.addEventListener('click', () => {
+  document.getElementById("operacion").value="";
+  document.getElementById("cifrassolucion").innerHTML="Buscar solución";
   cifrasGame.newGame();
   const numbers = cifrasGame.getNumbers();
   const target = cifrasGame.getTarget();
@@ -106,7 +122,7 @@ nuevascifras.addEventListener('click', () => {
 const cifrassolucion = document.getElementById('cifrassolucion');
 cifrassolucion.addEventListener('click', () => {
   console.log("Buscando solución");
-  cifrassolucion.innerHTML="Buscando solución";
+  document.getElementById("cifrassolucion").innerHTML="Buscando...";
   const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
   console.log(sol);
   cifrassolucion.innerHTML=sol;
