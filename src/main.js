@@ -1,12 +1,12 @@
 // src/main.js
-import { CifrasGame } from './cifras.js';
+import { CifrasGame, resolver } from './cifras.js';
 import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } from './letras.js';
 
 const app = document.querySelector('#app');
-let mode = 'Letras';
+let mode = 'Cifras';
 const letrasSection = document.getElementById('letras-section');
 const cifrasSection = document.getElementById('cifras-section');
-cifrasSection.style.display = 'none';
+letrasSection.style.display = 'none';
 
 const modeButton = document.getElementById('mode-button');
 const palabraInput = document.getElementById('palabrausuario');
@@ -87,38 +87,40 @@ palabrasolucion.addEventListener('click', () => {
 
 
 
-/*
-let cifrasGame = new CifrasGame();
+const nuevascifras = document.getElementById('nuevascifras');
 
-const generateButton = document.getElementById('nuevoJuego');
-generateButton.addEventListener('click', () => {
+let cifrasGame=new CifrasGame();
+
+nuevascifras.addEventListener('click', () => {
   cifrasGame.newGame();
   const numbers = cifrasGame.getNumbers();
   const target = cifrasGame.getTarget();
 
-  const numbersContainer = document.querySelector('#numeros-lista');
-  numbersContainer.className='contenedor';
-  numbersContainer.innerHTML = '';
-  numbers.forEach(number => {
-    const numberElement = document.createElement('div');
-    numberElement.className='caja';
-    numberElement.textContent = number;
-    numbersContainer.appendChild(numberElement);
-  });
-
-  document.querySelector('#objetivo').textContent = target;
-  document.getElementById('operacion').value = '';
+  for(let i=1;i<=6;i++){
+    const ni = document.getElementById("n"+i);
+    ni.value=numbers[i-1];
+  }
+  document.getElementById("objetivo").value=target;
 });
 
+const cifrassolucion = document.getElementById('cifrassolucion');
+cifrassolucion.addEventListener('click', () => {
+  console.log("Buscando solución");
+  cifrassolucion.innerHTML="Buscando solución";
+  const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+  console.log(sol);
+  cifrassolucion.innerHTML=sol;
+});
 
-const checkButton = document.createElement('button');
-checkButton.textContent = 'Comprobar';
-checkButton.addEventListener('click', () => {
-  const input = document.querySelector('#cifras-input').value;
+const operacion = document.getElementById('operacion');
+const comprobarSolucion = document.getElementById('comprobarSolucion');
+
+comprobarSolucion.addEventListener('click', () => {
   try {
-    const result = cifrasGame.check(input);
+    const result = eval(operacion.value);
     const target = cifrasGame.getTarget();
     const difference = Math.abs(result - target);
+    console.log(`resultado ${result}, objetivo ${target}, diferencia ${difference}`);
 
     if (result === target) {
       alert('¡Has ganado!');
@@ -129,9 +131,3 @@ checkButton.addEventListener('click', () => {
     alert(error.message);
   }
 });
-
-/*
-if (cifrasSection) {
-    cifrasSection.appendChild(checkButton);
-}*/
-
