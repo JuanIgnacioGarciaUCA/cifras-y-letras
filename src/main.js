@@ -1,5 +1,5 @@
 // src/main.js
-import { CifrasGame } from './cifras.js';
+import { CifrasGame, resolver } from './cifras.js';
 import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } from './letras.js';
 
 const app = document.querySelector('#app');
@@ -103,18 +103,24 @@ nuevascifras.addEventListener('click', () => {
   document.getElementById("objetivo").value=target;
 });
 
+const cifrassolucion = document.getElementById('cifrassolucion');
+cifrassolucion.addEventListener('click', () => {
+  console.log("Buscando solución");
+  cifrassolucion.innerHTML="Buscando solución";
+  const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+  console.log(sol);
+  cifrassolucion.innerHTML=sol;
+});
 
-/*
+const operacion = document.getElementById('operacion');
+const comprobarSolucion = document.getElementById('comprobarSolucion');
 
-
-const checkButton = document.createElement('button');
-checkButton.textContent = 'Comprobar';
-checkButton.addEventListener('click', () => {
-  const input = document.querySelector('#cifras-input').value;
+comprobarSolucion.addEventListener('click', () => {
   try {
-    const result = cifrasGame.check(input);
+    const result = eval(operacion.value);
     const target = cifrasGame.getTarget();
     const difference = Math.abs(result - target);
+    console.log(`resultado ${result}, objetivo ${target}, diferencia ${difference}`);
 
     if (result === target) {
       alert('¡Has ganado!');
@@ -125,9 +131,3 @@ checkButton.addEventListener('click', () => {
     alert(error.message);
   }
 });
-
-/*
-if (cifrasSection) {
-    cifrasSection.appendChild(checkButton);
-}*/
-

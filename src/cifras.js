@@ -1,5 +1,5 @@
 // Función para resolver el juego de Cifras de forma recursiva
-function resolver(objetivo, numeros) {
+export function resolver(objetivo, numeros) {
   const operaciones = ['+', '-', '*', '/'];
   let mejorSolucion = null;
   let diferenciaMinima = Infinity;
