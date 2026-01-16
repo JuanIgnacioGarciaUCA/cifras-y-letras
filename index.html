@@ -15,12 +15,49 @@
 
     <section id="cifras-section" class="w3-panel">
       <h2>Cifras</h2>
-      <div class="cifras-container" id="cifras-id">
-        <div id="objetivo" class="objetivoCSS">---</div>
-        <div id="numeros-lista" class="contenedor">..</div>
-        <input class="w3-input" type="text" id="operacion" placeholder="Ej: (50+2)*4">
-        <p id="resultado-msg"></p>
+      <p>
+      <div class="w3-row">
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n1" disabled>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n2" disabled>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n3" disabled>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n4" disabled>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n5" disabled>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 12%;">
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n6" disabled>
+        </div>
       </div>
+      <br>
+      Objetivo: <input id="objetivo" class="w3-input w3-border" style="width:15%" placeholder="___" disabled>
+      <br>
+      <div class="w3-row">
+        <input class="w3-input w3-col" type="text" id="operacion" placeholder="Ej: (50+2)*4" style="width: 80%;">
+        <button id="comprobarSolucion" class="w3-btn w3-border w3-col" style="width: 20%;">&#x2705;&#x274C;</button>
+      </div>
+      <p>
+      <div class="w3-buttom w3-border w3-round" id="cifrassolucion">
+         Buscar solución
+      </div>
+      <br>
+      <div class="w3-btn w3-border w3-round" style="height: 25%;" id="nuevascifras">
+         Nuevo Juego
+      </div>
+
+      
     </section>
 
     <section id="letras-section" class="w3-panel">
@@ -43,36 +80,45 @@
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l1" >
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l2">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l3">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l4">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l5">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l6">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l7">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l8">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l9">
         </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
           <input class="w3-input w3-border" type="text" placeholder="_" id="l10">
         </div>
       </div>   
       <p>   
-      <button id="btn-pedir-letra" class="w3-btn w3-border">Pedir Letras</button>   
+      <button id="btn-pedir-letra" class="w3-btn w3-border w3-round">Pedir Letras</button> 
       <p>
 
       <div class="w3-row">
@@ -86,16 +132,16 @@
         </div>
       </div>
       <p>
-      <div class="w3-border w3-round-large " id="palabrasolucion">
-         Pulse aquí para posible solución
+      <div class="w3-buttom w3-border w3-round-large " id="palabrasolucion">
+         Buscar solución
       </div>
       <p></p>
-      <button class="w3-btn w3-border w3-white" id="btn-nuevoJuego">Nuevo Juego</button>
+      <button class="w3-btn w3-border w3-white w3-round" id="btn-nuevoJuego">Nuevo Juego</button>
     </section>
 
   </main>
   <p>
-  <button class="w3-btn w3-border w3-white" id="mode-button">Cambiar a Cifras</button>
+  <button class="w3-btn w3-border w3-white w3-round" id="mode-button">Cambiar a Letras</button>
   <footer>
     <p>&copy; 2026 Cifras y Letras</p>
   </footer>
