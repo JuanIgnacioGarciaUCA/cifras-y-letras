@@ -11,6 +11,8 @@ const letrasSectionTV = document.getElementById('letrasTV-section');
 const cifrasSectionTV = document.getElementById('cifrasTV-section');
 
 letrasSection.style.display = 'none';
+letrasSectionTV.style.display = 'none';
+cifrasSectionTV.style.display = 'none';
 
 const modeButton = document.getElementById('mode-button');
 const modeButtonTV = document.getElementById('mode-TV');
@@ -20,16 +22,33 @@ const numvocales = document.getElementById('numvocales');
 const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
 const palabrasolucion=document.getElementById("palabrasolucion");
 
+function borrarTodo(){
+  palabraInput.value='';
+  palabrasolucion.innerHTML='Pulse aquí para posible solución';
+  for(let i=1;i<=10;i++){
+    let letrai=document.getElementById("l"+i);
+    letrai.value='_';
+  }
+  for(let i=1;i<=6;i++){
+    const ni = document.getElementById("n"+i);
+    ni.value='';
+  }
+  document.getElementById("objetivo").value='';
+  document.getElementById("operacion").value="";
+  document.getElementById("cifrassolucion").innerHTML="Buscar solución";
+}
+
 function cambiaBloquesVisibles(){
+  borrarTodo();
   if(modeTV){
     if (mode === 'Letras') {
       letrasSectionTV.style.display = 'block';
       cifrasSectionTV.style.display = 'none';
-      modeButton.textContent = 'Cambiar a Letras';
+      modeButton.textContent = 'Cambiar a Cifras';
     } else {
       letrasSectionTV.style.display = 'none';
       cifrasSectionTV.style.display = 'block';
-      modeButton.textContent = 'Cambiar a Cifras';
+      modeButton.textContent = 'Cambiar a Letras';
     }
     letrasSection.style.display = 'none';
     cifrasSection.style.display = 'none';
@@ -37,11 +56,11 @@ function cambiaBloquesVisibles(){
         if (mode === 'Letras') {
       letrasSection.style.display = 'block';
       cifrasSection.style.display = 'none';
-      modeButton.textContent = 'Cambiar a Letras';
+      modeButton.textContent = 'Cambiar a Cifras';
     } else {
       letrasSection.style.display = 'none';
       cifrasSection.style.display = 'block';
-      modeButton.textContent = 'Cambiar a Cifras';
+      modeButton.textContent = 'Cambiar a Letras';
     }
     letrasSectionTV.style.display = 'none';
     cifrasSectionTV.style.display = 'none';
@@ -52,6 +71,8 @@ function cambiaBloquesVisibles(){
 modeButtonTV.addEventListener('click', () => {
   if(modeTV){
     modeTV=false;
+  }else{
+    modeTV=true;
   }
   cambiaBloquesVisibles();
 });
@@ -123,16 +144,6 @@ palabrasolucion.addEventListener('click', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 ///////////////
 // Cifras game
 ///////////////
@@ -183,3 +194,48 @@ comprobarSolucion.addEventListener('click', () => {
     alert(error.message);
   }
 });
+
+
+//////////////////////////////////////////////////
+// Código para la versión TV
+//////////////////////////////////////////////
+
+
+for(let i=1;i<10;i++){
+  const ni = document.getElementById("tvl"+i);
+  const nimas1 = document.getElementById("tvl"+(i+1));
+  ni.addEventListener('input', () => {
+    if(ni.value.length>=1){
+      nimas1.focus();
+    }
+  });
+} 
+
+const tvl10=document.getElementById("tvl10");
+tvl10.addEventListener('input', () => {
+  if(tvl10.value.length>=1){
+    //document.getElementById("palabrasolucionTV").focus();
+    document.activeElement.blur();
+  }
+});
+
+// botón buscar solución letras TV
+const palabrasolucionTV=document.getElementById("palabrasolucionTV");
+palabrasolucionTV.addEventListener('click', () => {
+  import('./letras.js').then(({ verificarPalabra }) => {
+    const letrasTV=[];
+    for(let i=1;i<=10;i++){
+      let letrai=document.getElementById("tvl"+i);
+      letrasTV.push(letrai.value.trim().toLowerCase());
+    }
+    console.log("letrasTV=",letrasTV);
+    const propuesta=encontrarPalabraMasLarga(letrasTV);
+    if(propuesta!=null){
+      palabrasolucionTV.innerHTML=`<a href="https://dle.rae.es/${propuesta}" target="_blank">${propuesta}</a>`;
+    }else{
+      palabrasolucionTV.value="no hay propuesta";
+    }
+  });
+});
+
+
