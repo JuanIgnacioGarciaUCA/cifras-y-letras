@@ -4,30 +4,66 @@ import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } fr
 
 const app = document.querySelector('#app');
 let mode = 'Cifras';
+let modeTV = false;
 const letrasSection = document.getElementById('letras-section');
 const cifrasSection = document.getElementById('cifras-section');
+const letrasSectionTV = document.getElementById('letrasTV-section');
+const cifrasSectionTV = document.getElementById('cifrasTV-section');
+
 letrasSection.style.display = 'none';
 
 const modeButton = document.getElementById('mode-button');
+const modeButtonTV = document.getElementById('mode-TV');
 const palabraInput = document.getElementById('palabrausuario');
 const nuevasLetras = document.getElementById('nuevasLetras');
 const numvocales = document.getElementById('numvocales');
 const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
 const palabrasolucion=document.getElementById("palabrasolucion");
 
+function cambiaBloquesVisibles(){
+  if(modeTV){
+    if (mode === 'Letras') {
+      letrasSectionTV.style.display = 'block';
+      cifrasSectionTV.style.display = 'none';
+      modeButton.textContent = 'Cambiar a Letras';
+    } else {
+      letrasSectionTV.style.display = 'none';
+      cifrasSectionTV.style.display = 'block';
+      modeButton.textContent = 'Cambiar a Cifras';
+    }
+    letrasSection.style.display = 'none';
+    cifrasSection.style.display = 'none';
+  }else{
+        if (mode === 'Letras') {
+      letrasSection.style.display = 'block';
+      cifrasSection.style.display = 'none';
+      modeButton.textContent = 'Cambiar a Letras';
+    } else {
+      letrasSection.style.display = 'none';
+      cifrasSection.style.display = 'block';
+      modeButton.textContent = 'Cambiar a Cifras';
+    }
+    letrasSectionTV.style.display = 'none';
+    cifrasSectionTV.style.display = 'none';
+  }
+}
+
+// botón de modo de juego
+modeButtonTV.addEventListener('click', () => {
+  if(modeTV){
+    modeTV=false;
+  }
+  cambiaBloquesVisibles();
+});
+
 // botón de modo de juego
 modeButton.addEventListener('click', () => {
   if (mode === 'Letras') {
     mode = 'Cifras';
-    letrasSection.style.display = 'none';
-    cifrasSection.style.display = 'block';
-    modeButton.textContent = 'Cambiar a Letras';
   } else {
     mode = 'Letras';
-    letrasSection.style.display = 'block';
-    cifrasSection.style.display = 'none';
-    modeButton.textContent = 'Cambiar a Cifras';
   }
+  cambiaBloquesVisibles();
 });
 
 
