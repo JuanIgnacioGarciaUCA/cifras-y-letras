@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/cifras-y-letras/sw.js', { scope: '/cifras-y-letras/' })})}
