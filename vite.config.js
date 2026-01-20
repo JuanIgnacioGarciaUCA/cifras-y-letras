@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/cifras-y-letras/', 
+  //base: '/cifras-y-letras/', 
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
