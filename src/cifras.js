@@ -24,6 +24,18 @@ export function resolver(objetivo, numeros) {
         }
       }
       return;
+    }else{
+      const resultado = calcularResultado(expresionActual);
+      if (!isNaN(resultado)) {
+        const diferencia = Math.abs(resultado - objetivo);
+        if (diferencia < diferenciaMinima) {
+          diferenciaMinima = diferencia;
+          mejorSolucion = expresionActual + ' = ' + resultado;
+        }
+      }
+      if(diferenciaMinima===0){ 
+        return;
+      }
     }
 
     for (let i = 0; i < numerosRestantes.length; i++) {
