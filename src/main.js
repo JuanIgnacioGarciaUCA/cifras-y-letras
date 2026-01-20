@@ -290,3 +290,44 @@ cifrassolucionTV.addEventListener('click', () => {
     document.getElementById('loader').style.display = 'none';
   }, 50);
 });
+
+
+
+///////////////////////
+// Instalación de pwa
+///////////////////////
+
+let eventoInstalacion; // Variable para guardar el evento
+const botonInstalar = document.getElementById('btnInstalar');
+
+// 1. Escuchar el evento que lanza el navegador cuando detecta que la PWA es instalable
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Evitar que Chrome muestre su propio banner automático (mini-infobar)
+  e.preventDefault();
+  // Guardar el evento para usarlo después
+  eventoInstalacion = e;
+  // Mostrar nuestro botón de instalación
+  botonInstalar.style.display = 'block';
+});
+
+// 2. Programar el clic del botón
+botonInstalar.addEventListener('click', async () => {
+  if (eventoInstalacion) {
+    // Mostrar el mensaje nativo de confirmación del navegador
+    eventoInstalacion.prompt();
+    
+    // Esperar a que el usuario responda
+    const { outcome } = await eventoInstalacion.userChoice;
+    console.log(`El usuario respondió: ${outcome}`);
+    
+    // Limpiar la variable y ocultar el botón (ya no se puede usar el evento de nuevo)
+    eventoInstalacion = null;
+    botonInstalar.style.display = 'none';
+  }
+});
+
+// 3. (Opcional) Detectar cuando la app ya se instaló con éxito
+window.addEventListener('appinstalled', () => {
+  console.log('¡PWA instalada con éxito!');
+  botonInstalar.style.display = 'none';
+});
