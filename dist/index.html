@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
+=======
+<link rel="manifest" href="/mi-pwa-app/manifest.webmanifest" />
+
+<head>    
+>>>>>>> 3582f32c05853ea70893a588c95a4385cb4f9fdd
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="icon" type="image/svg+xml" href="/cifras-y-letras/vite.svg">
     <title>Cifras-y-Letras</title>
+<<<<<<< HEAD
     
   <script type="module" crossorigin src="/cifras-y-letras/assets/index-uFSHL6rf.js"></script>
+=======
+  <script type="module" crossorigin src="/cifras-y-letras/assets/index-C5IJsuqB.js"></script>
+>>>>>>> 3582f32c05853ea70893a588c95a4385cb4f9fdd
 <link rel="manifest" href="/cifras-y-letras/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/cifras-y-letras/registerSW.js"></script></head>
 
 <body class="w3-container w3-gray">
@@ -117,7 +127,11 @@
         <div class="w3-col" style="width: 9%;">
           <div class="w3-input w3-border" type="text" placeholder="_" id="l10"></div>
         </div>
+<<<<<<< HEAD
       </div>   
+=======
+      </div>
+>>>>>>> 3582f32c05853ea70893a588c95a4385cb4f9fdd
       <p>   
 
       <div class="w3-row">
@@ -138,9 +152,66 @@
       <button class="w3-btn w3-border w3-white w3-round" id="nuevasLetras">Nuevo Juego</button>
     </section>
 
+<<<<<<< HEAD
     <section id="cifrasTV-section" class="w3-panel"></section>
     
     <section id="letrasTV-section" class="w3-panel"></section>
+=======
+    <section id="cifrasTV-section" class="w3-panel w3-border">
+      <h2>Cifras TV</h2>
+    </section>
+
+    <section id="letrasTV-section" class="w3-panel w3-border">
+      <h2>Letras TV</h2>
+
+      <div class="w3-row">
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl1"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl2"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl3"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl4"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl5"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl6"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl7"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl8"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl9"></input>
+        </div>
+        <div class="w3-col" style="width: 1%;">&nbsp;</div>
+        <div class="w3-col" style="width: 9%;">
+          <input class="w3-input w3-border" type="text" placeholder="_" id="tvl10"></input>
+        </div>
+      </div>
+      <p></p>
+      <div class="w3-buttom w3-border w3-round-large " id="palabrasolucionTV">
+         Buscar solución
+      </div>
+      <br>
+    </section>
+>>>>>>> 3582f32c05853ea70893a588c95a4385cb4f9fdd
 
   </main>
   <p>
@@ -150,5 +221,27 @@
     <p>&copy; 2026 Cifras y Letras</p>
   </footer>
   
+<<<<<<< HEAD
 </body>
 </html>
+=======
+
+</body>
+</html>
+
+<script>
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    const swUrl = `${import.meta.env.BASE_URL}sw.js`
+    navigator.serviceWorker
+      .register(swUrl, { scope: import.meta.env.BASE_URL })
+      .then(registration => {
+        console.log('SW registrado con scope:', registration.scope)
+      })
+      .catch(error => {
+        console.error('Error al registrar SW:', error)
+      })
+  })
+}
+</script>
+>>>>>>> 3582f32c05853ea70893a588c95a4385cb4f9fdd
