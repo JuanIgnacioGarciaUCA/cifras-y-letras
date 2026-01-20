@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/cifras-y-letras/',
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
@@ -9,9 +10,9 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
-        name: 'Mi Juego',
-        short_name: 'Juego',
-        description: 'Un juego instalable con PWA.',
+        name: 'Cifras y Letras',
+        short_name: 'C&L',
+        description: 'Cifras y Letras en PWA.',
         theme_color: '#ffffff',
         background_color: '#0000ff',
         icons: [
@@ -34,7 +35,8 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024
       }
     })
   ]
