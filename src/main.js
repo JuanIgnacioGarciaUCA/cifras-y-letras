@@ -183,11 +183,16 @@ nuevascifras.addEventListener('click', () => {
 
 const cifrassolucion = document.getElementById('cifrassolucion');
 cifrassolucion.addEventListener('click', () => {
-  console.log("Buscando solución");
-  document.getElementById("cifrassolucion").innerHTML="Buscando...";
-  const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
-  console.log(sol);
-  cifrassolucion.innerHTML=sol;
+  document.getElementById('loader').style.display = 'block';
+  setTimeout(function(){
+    console.log("Buscando solución");
+    //document.getElementById("cifrassolucion").innerHTML="Buscando...";
+    const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+    console.log(sol);
+    cifrassolucion.innerHTML=sol;
+    document.getElementById('loader').style.display = 'none';
+  }, 50);
+
 });
 
 const operacion = document.getElementById('operacion');
@@ -255,45 +260,33 @@ palabrasolucionTV.addEventListener('click', () => {
 
 
 ///////////////////
+// cifras TV
+///////////////////
 
-
-/*
-for(let i=1;i<6;i++){
-  const tvni = document.getElementById("tvn"+i);
-  const tvnimas1 = document.getElementById("tvn"+(i+1));
-  tvni.addEventListener('input', () => {
-    if(tvni.value.length>=1){
-      tvnimas1.focus();
-    }
-  });
-} 
-document.getElementById("tvn6").addEventListener('input', () => {
-  document.getElementById("objetivoTV").focus();
-});
-
-objetivoTV.addEventListener('input', () => {
-  document.activeElement.blur();
-});*/
 
 
 cifrassolucionTV.addEventListener('click', () => {
-  cifrasGame.newGame();
+  document.getElementById('loader').style.display = 'block';
+  setTimeout(function(){
+    cifrasGame.newGame();
 
-  cifrasGame.objetivo=objetivoTV.value;
-  cifrasGame.numeros=[];
-  for(let i=1;i<=6;i++){
-    cifrasGame.numeros[i-1] = document.getElementById("tvn"+i).value;
-  }
+    cifrasGame.objetivo=objetivoTV.value;
+    cifrasGame.numeros=[];
+    for(let i=1;i<=6;i++){
+      cifrasGame.numeros[i-1] = document.getElementById("tvn"+i).value;
+    }
 
-  const numbers = cifrasGame.getNumbers();
-  const target = cifrasGame.getTarget();
+    const numbers = cifrasGame.getNumbers();
+    const target = cifrasGame.getTarget();
 
-  console.log("Buscando solución");
-  console.log(numbers);
-  console.log(target);
-  cifrassolucionTV.innerHTML="Buscando...";
-  const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
-  console.log(sol);
-  cifrassolucionTV.innerHTML=sol;
+    console.log("Buscando solución");
+    console.log(numbers);
+    console.log(target);
+    //cifrassolucionTV.innerHTML="Buscando...";
+    const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+    console.log(sol);
+    cifrassolucionTV.innerHTML=sol;
 
+    document.getElementById('loader').style.display = 'none';
+  }, 50);
 });

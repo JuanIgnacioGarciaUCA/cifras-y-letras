@@ -8,7 +8,33 @@
     <title>Cifras-y-Letras</title>
 </head>
 
-<body class="w3-container w3-light-green">
+<div id="loader" class="w3-modal w3-lime" style="display:none">
+  <div class="w3-display-middle">
+    <div class="loader-spinner"></div>
+  </div>
+</div>
+<style>
+.loader-spinner {
+  /* Tamaño basado en el ancho del contenedor padre */
+  width: 50vw; 
+  height: 50vw; 
+  /* El borde no acepta %, usamos 'vw' para que crezca/encoja con el spinner */
+  border: 1vw solid #f3f3f3; 
+  border-top: 1vw solid #2196F3; 
+  /* El radio sí acepta porcentaje para ser un círculo perfecto */
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  /* Centrado opcional si el padre no lo hace */
+  display: inline-block;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+
+<body class="w3-container w3-light-green" id="body1">
   <h1>Cifras y Letras</h1>
   <main class="w3-container w3-border w3-white w3-round-large">
 
