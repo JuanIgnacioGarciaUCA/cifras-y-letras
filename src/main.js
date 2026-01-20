@@ -21,9 +21,14 @@ const nuevasLetras = document.getElementById('nuevasLetras');
 const numvocales = document.getElementById('numvocales');
 const comprobarPalabraBtn = document.getElementById('comprobarpalabra');
 const palabrasolucion=document.getElementById("palabrasolucion");
+const cifrassolucionTV=document.getElementById("cifrassolucionTV");
+const objetivoTV=document.getElementById("objetivoTV");
+
 
 function borrarTodo(){
-  palabraInput.value='';
+  objetivoTV.value='';
+  cifrassolucionTV.innerHTML="Buscar solución"
+  palabraInput.value='Buscar Solución';
   palabrasolucion.innerHTML='Pulse aquí para posible solución';
   for(let i=1;i<=10;i++){
     let letrai=document.getElementById("l"+i);
@@ -251,12 +256,44 @@ palabrasolucionTV.addEventListener('click', () => {
 
 ///////////////////
 
-for(let i=1;i<10;i++){
+
+/*
+for(let i=1;i<6;i++){
   const tvni = document.getElementById("tvn"+i);
   const tvnimas1 = document.getElementById("tvn"+(i+1));
-  ni.addEventListener('input', () => {
-    if(ni.value.length>=1){
-      nimas1.focus();
+  tvni.addEventListener('input', () => {
+    if(tvni.value.length>=1){
+      tvnimas1.focus();
     }
   });
 } 
+document.getElementById("tvn6").addEventListener('input', () => {
+  document.getElementById("objetivoTV").focus();
+});
+
+objetivoTV.addEventListener('input', () => {
+  document.activeElement.blur();
+});*/
+
+
+cifrassolucionTV.addEventListener('click', () => {
+  cifrasGame.newGame();
+
+  cifrasGame.objetivo=objetivoTV.value;
+  cifrasGame.numeros=[];
+  for(let i=1;i<=6;i++){
+    cifrasGame.numeros[i-1] = document.getElementById("tvn"+i).value;
+  }
+
+  const numbers = cifrasGame.getNumbers();
+  const target = cifrasGame.getTarget();
+
+  console.log("Buscando solución");
+  console.log(numbers);
+  console.log(target);
+  cifrassolucionTV.innerHTML="Buscando...";
+  const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+  console.log(sol);
+  cifrassolucionTV.innerHTML=sol;
+
+});
