@@ -27,13 +27,22 @@ function borrarTodo(){
   palabrasolucion.innerHTML='Pulse aquí para posible solución';
   for(let i=1;i<=10;i++){
     let letrai=document.getElementById("l"+i);
-    letrai.value='_';
+    letrai.value='';
+  }
+  for(let i=1;i<=10;i++){
+    let letrai=document.getElementById("tvl"+i);
+    letrai.value='';
   }
   for(let i=1;i<=6;i++){
     const ni = document.getElementById("n"+i);
     ni.value='';
   }
+  for(let i=1;i<=6;i++){
+    const tvni = document.getElementById("tvn"+i);
+    tvni.value='';
+  }
   document.getElementById("objetivo").value='';
+  document.getElementById("objetivoTV").value='';
   document.getElementById("operacion").value="";
   document.getElementById("cifrassolucion").innerHTML="Buscar solución";
 }
@@ -104,13 +113,14 @@ numvocales.addEventListener('change', () => {
 // nuevo juego letras
 let letras;
 nuevasLetras.addEventListener('click', () => {
+  borrarTodo();
   palabraInput.value='';
   palabrasolucion.innerHTML='Pulse aquí para posible solución';
   letras=generarLetrasAleatorias(numvocales.value,10-numvocales.value);
   console.log("letras=",letras);
   for(let i=1;i<=10;i++){
     let letrai=document.getElementById("l"+i);
-    letrai.innerHTML="<center><b>"+letras[i-1].toUpperCase()+"</b></center>";
+    letrai.value=letras[i-1].toUpperCase();
   }
 });
 
@@ -239,3 +249,14 @@ palabrasolucionTV.addEventListener('click', () => {
 });
 
 
+///////////////////
+
+for(let i=1;i<10;i++){
+  const tvni = document.getElementById("tvn"+i);
+  const tvnimas1 = document.getElementById("tvn"+(i+1));
+  ni.addEventListener('input', () => {
+    if(ni.value.length>=1){
+      nimas1.focus();
+    }
+  });
+} 
