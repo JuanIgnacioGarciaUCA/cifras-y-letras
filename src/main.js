@@ -1,6 +1,6 @@
 // src/main.js
 import { CifrasGame, resolver } from './cifras.js';
-import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } from './letras.js';
+import { generarLetrasAleatorias, esPalabraValida, encontrarPalabrasMasLargas } from './letras.js';
 const version = import.meta.env.APP_VERSION;
 document.getElementById('version-display').innerText = `Versión: ${version}`;
 console.log(version);
@@ -27,8 +27,25 @@ const palabrasolucion=document.getElementById("palabrasolucion");
 const cifrassolucionTV=document.getElementById("cifrassolucionTV");
 const objetivoTV=document.getElementById("objetivoTV");
 
+const operacion = document.getElementById('operacion');
+
+const palabrasolucionTV=document.getElementById("palabrasolucionTV");
+const sol1=document.getElementById("sol1");
+const sol2=document.getElementById("sol2");
+const sol3=document.getElementById("sol3");
+const sol4=document.getElementById("sol4");
+const linksol1=document.getElementById("linksol1");
+const linksol2=document.getElementById("linksol2");
+const linksol3=document.getElementById("linksol3");
+const linksol4=document.getElementById("linksol4");
+
 
 function borrarTodo(){
+  nIUsados=[false,false,false,false,false,false];
+  for(let i=0;i<6;i++){
+    let nI=document.getElementById("n"+(i+1));
+    nI.style.color="";
+  }
   objetivoTV.value='';
   cifrassolucionTV.innerHTML="Buscar solución"
   palabraInput.value='Buscar Solución';
@@ -150,7 +167,7 @@ comprobarPalabraBtn.addEventListener('click', () => {
 // botón encontrar palabra más larga
 palabrasolucion.addEventListener('click', () => {
   import('./letras.js').then(({ verificarPalabra }) => {
-    const propuesta=encontrarPalabraMasLarga(letras);
+    const propuesta=encontrarPalabrasMasLargas(letras);
     if(propuesta!=null){
       palabrasolucion.innerHTML=`<a href="https://dle.rae.es/${propuesta}">${propuesta}</a>`;
     }else{
@@ -171,6 +188,8 @@ const nuevascifras = document.getElementById('nuevascifras');
 let cifrasGame=new CifrasGame();
 
 nuevascifras.addEventListener('click', () => {
+  borrarTodo();
+
   document.getElementById("operacion").value="";
   document.getElementById("cifrassolucion").innerHTML="Buscar solución";
   cifrasGame.newGame();
@@ -198,7 +217,6 @@ cifrassolucion.addEventListener('click', () => {
 
 });
 
-const operacion = document.getElementById('operacion');
 const comprobarSolucion = document.getElementById('comprobarSolucion');
 
 comprobarSolucion.addEventListener('click', () => {
@@ -243,7 +261,7 @@ tvl10.addEventListener('input', () => {
 });
 
 // botón buscar solución letras TV
-const palabrasolucionTV=document.getElementById("palabrasolucionTV");
+
 palabrasolucionTV.addEventListener('click', () => {
   import('./letras.js').then(({ verificarPalabra }) => {
     const letrasTV=[];
@@ -252,11 +270,16 @@ palabrasolucionTV.addEventListener('click', () => {
       letrasTV.push(letrai.value.trim().toLowerCase());
     }
     console.log("letrasTV=",letrasTV);
-    const propuesta=encontrarPalabraMasLarga(letrasTV);
-    if(propuesta!=null){
-      palabrasolucionTV.innerHTML=`<a href="https://dle.rae.es/${propuesta}" target="_blank">${propuesta}</a>`;
+    const propuesta=encontrarPalabrasMasLargas(letrasTV);
+    let sols=[sol1,sol2,sol3,sol4];
+    let lss=[linksol1,linksol2,linksol3,linksol4];
+    if(propuesta!=[]){
+      for(let i=0;i<propuesta.length;i++){
+        sols[i].innerHTML=propuesta[i];
+        lss[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}" target="_blank">🌐</a>`;
+      }
     }else{
-      palabrasolucionTV.value="no hay propuesta";
+      sol1.innerHTML="no hay propuesta";
     }
   });
 });
@@ -334,3 +357,63 @@ window.addEventListener('appinstalled', () => {
   console.log('¡PWA instalada con éxito!');
   botonInstalar.style.display = 'none';
 });
+
+const resultado=document.getElementById("resultado");
+const parI=document.getElementById("parI");
+const parD=document.getElementById("parD");
+const opMas=document.getElementById("opMas");
+const opMenos=document.getElementById("opMenos");
+const opPor=document.getElementById("opPor");
+const opDiv=document.getElementById("opDiv");
+const nI=[];
+let nIUsados=[false,false,false,false,false,false];
+for(let i=1;i<=6;i++){
+  nI[i-1]=document.getElementById("n"+i);
+  nI[i-1].addEventListener("click", () =>{
+    if(!nIUsados[i-1]){
+      operacion.value=operacion.value+nI[i-1].value;   
+      operacionCambiado();
+      nIUsados[i-1]=true;
+      nI[i-1].style.color="#ff0000";
+    }
+  });
+}
+parI.addEventListener("click",()=>{
+  operacion.value=operacion.value+"(";
+  operacionCambiado();
+});
+parD.addEventListener("click",()=>{
+  operacion.value=operacion.value+")";
+  operacionCambiado();
+});
+opMas.addEventListener("click",()=>{
+  operacion.value=operacion.value+"+";
+  operacionCambiado();
+});
+opMenos.addEventListener("click",()=>{
+  operacion.value=operacion.value+"-";
+  operacionCambiado();
+});
+opPor.addEventListener("click",()=>{
+  operacion.value=operacion.value+"*";
+  operacionCambiado();
+});
+opDiv.addEventListener("click",()=>{
+  operacion.value=operacion.value+"/";
+  operacionCambiado();
+});
+operacion.addEventListener("input", () => {
+  operacionCambiado();
+});
+
+function operacionCambiado(){
+  let cad=operacion.value;
+  let aux;
+  try {
+    aux=eval(cad);
+  } catch (error) {
+    aux=NaN;
+  }
+  console.log(aux);
+  resultado.value=aux;
+}

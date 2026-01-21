@@ -122,46 +122,41 @@ export function esPalabraValida(palabra, letras) {
 // const existe = verificarPalabra(palabra);
 // console.log(`La palabra "${palabra}" existe: ${existe}`); // Ejemplo: La palabra "abidenu" existe: false
 
-
 /**
- * Encuentra la palabra más larga posible.
- * Asume que la variable global 'diccionario' ya está ordenada por longitud (descendente).
+ * Encuentra las n palabras más largas posibles.
  * 
- * @param {string[]} letras - Array de letras disponibles (ej: ['a', 'p', 'e', 'l'])
- * @returns {string|null} - La palabra más larga encontrada o null.
+ * @param {string[]} letras - Array de letras disponibles.
+ * @param {number} n - Cantidad de palabras a devolver (por defecto 5).
+ * @returns {string[]} - Array con las n palabras más largas encontradas.
  */
-export function encontrarPalabraMasLarga(letras) {
-    
-    // Recorremos el diccionario. 
-    // Al estar ordenado por longitud, el primer éxito es el ganador.
-    console.log("buscando en diccionario...");
+export function encontrarPalabrasMasLargas(letras, n = 4) {
+    const resultados = [];
+
+    console.log(`Buscando las ${n} palabras más largas...`);
+
     for (const palabra of diccionario) {
         if (sePuedeFormar(palabra, letras)) {
-            return palabra; 
+            resultados.push(palabra);
+        }
+
+        // Si ya encontramos la cantidad solicitada, dejamos de buscar
+        if (resultados.length === n) {
+            break;
         }
     }
 
-    return null; // Si no se encuentra ninguna
+    return resultados; // Devuelve el array (puede tener entre 0 y n elementos)
 }
 
 /**
- * Función auxiliar para verificar si una palabra se puede construir
- * con un mazo de letras determinado.
+ * Función auxiliar (se mantiene igual)
  */
 function sePuedeFormar(palabra, letras) {
-    // Creamos una copia del array de letras para poder ir "gastándolas"
-    // sin modificar la lista original.
     let copiaLetras = [...letras];
 
     for (const letra of palabra) {
         const indice = copiaLetras.indexOf(letra);
-        
-        if (indice === -1) {
-            // Si la letra no está, esta palabra no sirve
-            return false;
-        }
-        
-        // Si está, la "gastamos" eliminándola del array temporal
+        if (indice === -1) return false;
         copiaLetras.splice(indice, 1);
     }
     

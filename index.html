@@ -43,35 +43,52 @@
       <p>
       <div class="w3-row">
         <div class="w3-col" style="width: 12%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n1" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n1" readonly>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 15%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n2" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n2" readonly>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 15%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n3" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n3" readonly>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 15%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n4" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n4" readonly>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 15%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n5" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n5" readonly>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 15%;">
-          <input class="w3-input w3-border" type="text" placeholder="__" id="n6" disabled>
+          <input class="w3-input w3-border" type="text" placeholder="__" id="n6" readonly>
         </div>
       </div>
       <br>
-      Objetivo: <input id="objetivo" class="w3-input w3-border" style="width:15%" placeholder="___" disabled>
+      Objetivo: 
+      <input id="objetivo" class="w3-input w3-border" style="width:15%" placeholder="___" readonly>
+      <br>
+
+      <div class="w3-row">
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="parI">(</div>
+        <div class="w3-col" style="width: 2%;">&nbsp;</div>
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="parD">)</div>
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="opMas">+</div>
+        <div class="w3-col" style="width: 2%;">&nbsp;</div>
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="opMenos">-</div>
+        <div class="w3-col" style="width: 2%;">&nbsp;</div>
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="opPor">*</div>
+        <div class="w3-col" style="width: 2%;">&nbsp;</div>
+        <div class="w3-col w3-border w3-center" style="width: 10%;" id="opDiv">/</div>
+      </div>
+
       <br>
       <div class="w3-row">
-        <input class="w3-input w3-col" type="text" id="operacion" placeholder="Ej: (50+2)*4" style="width: 80%;">
-        <button id="comprobarSolucion" class="w3-btn w3-border w3-col" style="width: 20%;">&#x2705;&#x274C;</button>
+        <input class="w3-input w3-col w3-border" type="text" id="operacion" placeholder="Ej: (50+2)*4" style="width: 70%;">
+        <input class="w3-input w3-col w3-border" type="text" id="resultado" placeholder="___" style="width: 12%;">
+        <button id="comprobarSolucion" class="w3-btn w3-border w3-col" style="width: 18%;">&#x2705;&#x274C;</button>
       </div>
       <p>
       <div class="w3-buttom w3-border w3-round w3-center" id="cifrassolucion">
@@ -103,43 +120,43 @@
       <p>
       <div class="w3-row">
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l1" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l1" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l2" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l2" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l3" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l3" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l4" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l4" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l5" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l5" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l6" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l6" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l7" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l7" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l8" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l8" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l9" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l9" readonly></input>
         </div>
         <div class="w3-col" style="width: 1%;">&nbsp;</div>
         <div class="w3-col" style="width: 9%;">
-          <input class="w3-input w3-border" type="text" placeholder="_" id="l10" disabled></input>
+          <input class="w3-input w3-border" type="text" placeholder="_" id="l10" readonly></input>
         </div>
       </div>
       <p>   
@@ -208,9 +225,15 @@
       </div>
       <p></p>
       <div class="w3-buttom w3-border w3-round-large w3-center" id="palabrasolucionTV">
-         Buscar solución
+         Buscar soluciones
       </div>
       <br>
+      <table class="w3-table w3-bordered">
+        <tr><td id="sol1"></td><td id="linksol1"></td></tr>
+        <tr><td id="sol2"></td><td id="linksol2"></td></tr>
+        <tr><td id="sol3"></td><td id="linksol3"></td></tr>
+        <tr><td id="sol4"></td><td id="linksol4"></td></tr>
+      </table>
     </section>
 
     <section id="cifrasTV-section" class="w3-panel" style="padding-left: 0px; padding-right: 0%;">
