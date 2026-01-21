@@ -1,6 +1,9 @@
 // src/main.js
 import { CifrasGame, resolver } from './cifras.js';
 import { generarLetrasAleatorias, esPalabraValida, encontrarPalabraMasLarga } from './letras.js';
+const version = import.meta.env.APP_VERSION;
+document.getElementById('version-display').innerText = `Versión: ${version}`;
+console.log(version);
 
 const app = document.querySelector('#app');
 let mode = 'Cifras';
