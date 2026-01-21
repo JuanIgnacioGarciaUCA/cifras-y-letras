@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import pkg from './package.json';
 
 export default defineConfig({
   base: '/cifras-y-letras/',
+  define: {
+    // Esto crea una variable global que puedes usar en tu JS
+    'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
+  },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
