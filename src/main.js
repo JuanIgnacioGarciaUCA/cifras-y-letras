@@ -626,3 +626,5 @@ async function obtenerRanking() {
         console.log(`${doc.data().nombre}: ${doc.data().puntos}`);
     });
 }
+
+let x=77;
