@@ -17,8 +17,8 @@ letrasSection.style.display = 'none';
 letrasSectionTV.style.display = 'none';
 cifrasSectionTV.style.display = 'none';
 
-const modeButton = document.getElementById('mode-button');
-const modeButtonTV = document.getElementById('mode-TV');
+//const modeButton = document.getElementById('mode-button');
+//const modeButtonTV = document.getElementById('mode-TV');
 const palabraInput = document.getElementById('palabrausuario');
 const nuevasLetras = document.getElementById('nuevasLetras');
 const numvocales = document.getElementById('numvocales');
@@ -158,7 +158,7 @@ function cambiaBloquesVisibles(){
 }
 
 // botón de modo de juego
-modeButtonTV.addEventListener('click', () => {
+/*modeButtonTV.addEventListener('click', () => {
   if(modeTV){
     modeTV=false;
   }else{
@@ -175,7 +175,7 @@ modeButton.addEventListener('click', () => {
     mode = 'Letras';
   }
   cambiaBloquesVisibles();
-});
+});*/
 
 
 // botón pedir letras
@@ -501,3 +501,48 @@ function operacionCambiado(){
   console.log(aux);
   resultado.value=aux;
 }
+
+
+// 1. Función que se ejecuta tras el login exitoso
+function manejarRespuestaGoogle(response) {
+    // La respuesta contiene un token JWT (JSON Web Token)
+    const payload = parseJwt(response.credential);
+    
+    console.log("ID: " + payload.sub);
+    console.log("Nombre: " + payload.name);
+    console.log("Email: " + payload.email);
+    console.log("Foto: " + payload.picture);
+
+    // Guardar en localStorage para que la PWA lo recuerde
+    localStorage.setItem('usuario_pwa', JSON.stringify({
+        nombre: payload.name,
+        foto: payload.picture,
+        logged: true
+    }));
+
+    alert(`¡Bienvenido ${payload.name}!`);
+}
+
+// 2. Función auxiliar para leer los datos del token
+function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(window.atob(base64));
+}
+
+// 3. Inicializar Google al cargar la web
+window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "TU_CLIENT_ID_AQUI.apps.googleusercontent.com",
+        callback: manejarRespuestaGoogle
+    });
+
+    // Renderizar el botón en un contenedor con id="botonGoogle"
+    google.accounts.id.renderButton(
+        document.getElementById("botonGoogle"),
+        { theme: "outline", size: "large", shape: "pill" } 
+    );
+
+    // Opcional: Mostrar el aviso de "One Tap" (el desplegable de arriba a la derecha)
+    google.accounts.id.prompt();
+};

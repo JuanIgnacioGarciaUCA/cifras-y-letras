@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="icon" type="image/svg+xml" href="/vite.svg">
     <title>Cifras-y-Letras</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <div id="loader" class="w3-modal w3-lime" style="display:none">
@@ -36,7 +37,14 @@
 
 <body class="w3-container1 w3-light-green" id="body1">
 
-<h3>Cifras y Letras</h3>
+<div class="w3-row w3-display-container w3-padding">
+  <!-- s8 significa que ocupa 8 de 12 columnas (66%) -->
+  <div class="w3-col s8">
+    <h2 style="margin:0">Cifras y Letras</h2>
+  </div>
+  <!-- s4 significa que ocupa 4 de 12 columnas (33%) -->
+  <div class="w3-col s4" id="botonGoogle"></div>
+</div>
 
 <div class="w3-row w3-block w3-border" style="width: 100%; margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px;">
   
@@ -323,6 +331,7 @@
       <button id="btnInstalar" class="w3-lime" style="display: block; padding: 10px; color: white; border: none; border-radius: 5px; cursor: pointer;">
         📥  Instalar App
       </button>
+      
     </p>
   </footer>
   
