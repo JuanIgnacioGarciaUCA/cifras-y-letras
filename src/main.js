@@ -503,93 +503,73 @@ function operacionCambiado(){
 }
 
 
-// 1. Función que se ejecuta tras el login exitoso
-/*
-function manejarRespuestaGoogle(response) {
-    // La respuesta contiene un token JWT (JSON Web Token)
-    const payload = parseJwt(response.credential);
-    
-    console.log("ID: " + payload.sub);
-    console.log("Nombre: " + payload.name);
-    console.log("Email: " + payload.email);
-    console.log("Foto: " + payload.picture);
+///////////////////////
+// Login con Google
+///////////////////////
 
-    // Guardar en localStorage para que la PWA lo recuerde
-    localStorage.setItem('usuario_pwa', JSON.stringify({
-        nombre: payload.name,
-        foto: payload.picture,
-        logged: true
-    }));
-
-    alert(`¡Bienvenido ${payload.name}!`);
-}*/
-
-// 2. Función auxiliar para leer los datos del token
 function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(window.atob(base64));
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
 }
 
-// 3. Inicializar Google al cargar la web
+function mostrarPerfilUsuario(usuario) {
+    //const contenedorLogin = document.getElementById('contenedor-login');
+    const contenedorUsuario = document.getElementById('contenedor-usuario');
+    const fotoImg = document.getElementById('foto-usuario');
+    const nombreSpan = document.getElementById('nombre-usuario');
+
+    if (usuario) {
+        // 1. Ponemos la URL de la foto de Google en el src de la imagen
+        fotoImg.src = usuario.picture;
+        // 2. Ponemos el nombre
+        nombreSpan.innerText = usuario.name;
+        // 3. Intercambiamos los contenedores
+        //contenedorLogin.style.display = 'none';
+        contenedorUsuario.style.display = 'flex';
+    }
+}
+
+window.manejarRespuestaGoogle = function(response) {
+    // Extraemos los datos del token que nos da Google
+    const datosUsuario = parseJwt(response.credential);
+    
+    console.log("Datos recibidos:", datosUsuario);
+
+    // Guardamos en localStorage para que al recargar la PWA siga logueado
+    localStorage.setItem('usuario_identificado', JSON.stringify(datosUsuario));
+
+    // Ejecutamos la función para cambiar la interfaz
+    mostrarPerfilUsuario(datosUsuario);
+}
+
 window.onload = function () {
+    // Inicializar Google
     google.accounts.id.initialize({
         client_id: "47924315675-pdr6g1q9vpln1168861ng9u3bamimanc.apps.googleusercontent.com",
-        callback: manejarRespuestaGoogle
+        callback: manejarRespuestaGoogle // Llamamos a la función de arriba
     });
 
-    // Renderizar el botón en un contenedor con id="botonGoogle"
+    // Renderizar el botón
     google.accounts.id.renderButton(
         document.getElementById("botonGoogle"),
-        { theme: "outline", size: "large", shape: "pill" } 
+        { theme: "outline", size: "medium" }
     );
 
-    // Opcional: Mostrar el aviso de "One Tap" (el desplegable de arriba a la derecha)
-    google.accounts.id.prompt();
-
-    // 2. Verificar si ya estaba logueado anteriormente
-    const usuarioGuardado = JSON.parse(localStorage.getItem('usuario_pwa'));
-    if (usuarioGuardado) {
-        actualizarInterfaz(usuarioGuardado);
+    // REVISAR SI YA ESTABA LOGUEADO (Persistencia)
+    const sesionGuardada = localStorage.getItem('usuario_identificado');
+    if (sesionGuardada) {
+        mostrarPerfilUsuario(JSON.parse(sesionGuardada));
     }
 };
 
-// Función para actualizar la interfaz
-function actualizarInterfaz(usuario) {
-    const contenedorLogin = document.getElementById('contenedor-login');
-    const contenedorUsuario = document.getElementById('contenedor-usuario');
-
-    if (usuario && usuario.logged) {
-        // Mostrar datos del usuario
-        contenedorLogin.style.display = 'none';
-        contenedorUsuario.style.display = 'flex';
-        document.getElementById('nombre-usuario').innerText = usuario.nombre;
-        document.getElementById('foto-usuario').src = usuario.foto;
-    } else {
-        // Mostrar botón de login
-        contenedorLogin.style.display = 'block';
-        contenedorUsuario.style.display = 'none';
-    }
-}
-
-// Modifica tu callback de éxito
-function manejarRespuestaGoogle(response) {
-    const payload = parseJwt(response.credential);
-    
-    const usuario = {
-        nombre: payload.name,
-        foto: payload.picture,
-        logged: true
-    };
-
-    localStorage.setItem('usuario_pwa', JSON.stringify(usuario));
-    actualizarInterfaz(usuario);
-}
-
-// Función para Cerrar Sesión
 window.cerrarSesion = function() {
-    localStorage.removeItem('usuario_pwa');
-    google.accounts.id.disableAutoSelect(); // Evita que loguee solo al recargar
-    actualizarInterfaz(null);
-    location.reload(); // Opcional: recargar para limpiar estado del juego
-};
+    // Borramos el rastro en el navegador
+    localStorage.removeItem('usuario_identificado');
+    // Recargamos la página para limpiar todo y que vuelva a salir el botón de Google
+    location.reload(); 
+}
