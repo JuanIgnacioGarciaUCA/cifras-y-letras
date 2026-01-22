@@ -529,7 +529,7 @@ function mostrarPerfilUsuario(usuario) {
         // 2. Ponemos el nombre
         nombreSpan.innerText = usuario.name;
         // 3. Intercambiamos los contenedores
-        contenedorLogin.style.display = 'none';
+        botonGoogle.style.display = 'none';
         contenedorUsuario.style.display = 'flex';
     }
 }
