@@ -518,7 +518,7 @@ function parseJwt(token) {
 }
 
 function mostrarPerfilUsuario(usuario) {
-    //const contenedorLogin = document.getElementById('contenedor-login');
+    const botonGoogle = document.getElementById('botonGoogle');
     const contenedorUsuario = document.getElementById('contenedor-usuario');
     const fotoImg = document.getElementById('foto-usuario');
     const nombreSpan = document.getElementById('nombre-usuario');
@@ -529,7 +529,7 @@ function mostrarPerfilUsuario(usuario) {
         // 2. Ponemos el nombre
         nombreSpan.innerText = usuario.name;
         // 3. Intercambiamos los contenedores
-        //contenedorLogin.style.display = 'none';
+        contenedorLogin.style.display = 'none';
         contenedorUsuario.style.display = 'flex';
     }
 }
