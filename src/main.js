@@ -5,7 +5,6 @@ const version = import.meta.env.APP_VERSION;
 document.getElementById('version-display').innerText = `Versión: ${version}`;
 console.log(version);
 
-const app = document.querySelector('#app');
 let mode = 'Cifras';
 let modeTV = false;
 const letrasSection = document.getElementById('letras-section');
@@ -572,4 +571,58 @@ window.cerrarSesion = function() {
     localStorage.removeItem('usuario_identificado');
     // Recargamos la página para limpiar todo y que vuelva a salir el botón de Google
     location.reload(); 
+}
+
+///////////////////////
+// Firebase Analytics
+///////////////////////
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAvT49tY_q0_ecpzdJxgpize07BkpFKa44",
+  authDomain: "cifras-y-letras-ec61e.firebaseapp.com",
+  projectId: "cifras-y-letras-ec61e",
+  storageBucket: "cifras-y-letras-ec61e.firebasestorage.app",
+  messagingSenderId: "267177891125",
+  appId: "1:267177891125:web:0047953b90424fa3b0287c",
+  measurementId: "G-FBEEGXBVNE"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+// FUNCIÓN PARA GUARDAR PUNTUACIÓN
+async function guardarPuntuacionGlobal(puntos) {
+    const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
+    if (!usuario) return;
+
+    try {
+        await addDoc(collection(db, "rankings"), {
+            nombre: usuario.name,
+            foto: usuario.picture,
+            puntos: puntos,
+            fecha: new Date()
+        });
+        console.log("¡Récord guardado en la nube!");
+    } catch (e) {
+        console.error("Error al guardar: ", e);
+    }
+}
+
+// FUNCIÓN PARA OBTENER EL TOP 10
+async function obtenerRanking() {
+    const q = query(collection(db, "rankings"), orderBy("puntos", "desc"), limit(10));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.data().nombre}: ${doc.data().puntos}`);
+    });
 }
