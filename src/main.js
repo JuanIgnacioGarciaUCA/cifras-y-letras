@@ -202,7 +202,7 @@ palabrasolucion.addEventListener('click', () => {
       for(let i=0;i<propuesta.length;i++){
         console.log("propuesta ",i,": ",propuesta[i]);
         solsnormal[i].innerHTML=propuesta[i];
-        lssnormal[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}">${propuesta[i]}</a>`;
+        lssnormal[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}" style="text-decoration: none;" >🔗 Ver definición</a>`;
       }
       
     }else{
@@ -328,7 +328,7 @@ palabrasolucionTV.addEventListener('click', () => {
     if(propuesta!=[]){
       for(let i=0;i<propuesta.length;i++){
         sols[i].innerHTML=propuesta[i];
-        lss[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}" target="_blank">🌐</a>`;
+        lss[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}" target="_blank" style="text-decoration: none;">🔗 Ver definición</a>`;
       }
     }else{
       sol1.innerHTML="no hay propuesta";
