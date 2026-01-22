@@ -58,6 +58,32 @@ let lssnormal=[linksol1normal,linksol2normal,linksol3normal,linksol4normal,links
 let sols=[sol1,sol2,sol3,sol4,sol5];
 let lss=[linksol1,linksol2,linksol3,linksol4,linksol5];
 
+let bcifras=document.getElementById("bcifras");
+let bletras=document.getElementById("bletras");
+let bTV=document.getElementById("bTV");
+let bjuego=document.getElementById("bjuego");
+
+bcifras.addEventListener("click",()=>{
+  mode='Cifras';
+  cambiaBloquesVisibles();
+});
+
+bletras.addEventListener("click",()=>{
+  mode='Letras';
+  cambiaBloquesVisibles();
+});
+
+bTV.addEventListener("click",()=>{
+  modeTV=true;
+  cambiaBloquesVisibles();
+});
+
+bjuego.addEventListener("click",()=>{
+  modeTV=false;
+  cambiaBloquesVisibles();
+}); 
+
+
 function borrarTodo(){
   
   for(let i=0;i<5;i++){
