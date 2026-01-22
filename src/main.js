@@ -533,7 +533,7 @@ function parseJwt(token) {
 // 3. Inicializar Google al cargar la web
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "TU_CLIENT_ID_AQUI.apps.googleusercontent.com",
+        client_id: "47924315675-pdr6g1q9vpln1168861ng9u3bamimanc.apps.googleusercontent.com",
         callback: manejarRespuestaGoogle
     });
 
