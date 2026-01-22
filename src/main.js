@@ -1,5 +1,5 @@
 // src/main.js
-import { CifrasGame, resolver } from './cifras.js';
+import { CifrasGame, resolver1, ArbolBOp, NodoExpresion, obtenerPermutaciones } from './cifras.js';
 import { generarLetrasAleatorias, esPalabraValida, encontrarPalabrasMasLargas } from './letras.js';
 const version = import.meta.env.APP_VERSION;
 document.getElementById('version-display').innerText = `Versión: ${version}`;
@@ -208,10 +208,19 @@ cifrassolucion.addEventListener('click', () => {
   document.getElementById('loader').style.display = 'block';
   setTimeout(function(){
     console.log("Buscando solución");
+    console.log(cifrasGame.getTarget());
+    console.log(cifrasGame.getNumbers());
     //document.getElementById("cifrassolucion").innerHTML="Buscando...";
-    const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
+    const sol=resolver1(cifrasGame.getTarget(), cifrasGame.getNumbers(),5);
     console.log(sol);
-    cifrassolucion.innerHTML=sol;
+    cifrassolucion.innerHTML='Soluciones:<br>';
+    for(let i=0;i<sol.length;i++){
+      cifrassolucion.innerHTML=cifrassolucion.innerHTML+`${sol[i]}<br>`;
+    }
+    if(sol==[]){
+      cifrassolucionTV.innerHTML='No hay soluciones';
+    }
+
     document.getElementById('loader').style.display = 'none';
   }, 50);
 
@@ -309,9 +318,15 @@ cifrassolucionTV.addEventListener('click', () => {
     console.log(numbers);
     console.log(target);
     //cifrassolucionTV.innerHTML="Buscando...";
-    const sol=resolver(cifrasGame.getTarget(), cifrasGame.getNumbers());
-    console.log(sol);
-    cifrassolucionTV.innerHTML=sol;
+    const sol1=resolver1(target, numbers ,5);
+    console.log(sol1);
+    cifrassolucionTV.innerHTML='Soluciones:<br>';
+    for(let i=0;i<sol1.length;i++){
+      cifrassolucionTV.innerHTML=cifrassolucionTV.innerHTML+`${sol1[i]}<br>`;
+    }
+    if(sol1.length==0){
+      cifrassolucionTV.innerHTML='No se han encontrado soluciones';
+    }
 
     document.getElementById('loader').style.display = 'none';
   }, 50);
