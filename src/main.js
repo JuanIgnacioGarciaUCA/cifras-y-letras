@@ -504,6 +504,7 @@ function operacionCambiado(){
 
 
 // 1. Función que se ejecuta tras el login exitoso
+/*
 function manejarRespuestaGoogle(response) {
     // La respuesta contiene un token JWT (JSON Web Token)
     const payload = parseJwt(response.credential);
@@ -521,7 +522,7 @@ function manejarRespuestaGoogle(response) {
     }));
 
     alert(`¡Bienvenido ${payload.name}!`);
-}
+}*/
 
 // 2. Función auxiliar para leer los datos del token
 function parseJwt(token) {
@@ -545,4 +546,50 @@ window.onload = function () {
 
     // Opcional: Mostrar el aviso de "One Tap" (el desplegable de arriba a la derecha)
     google.accounts.id.prompt();
+
+    // 2. Verificar si ya estaba logueado anteriormente
+    const usuarioGuardado = JSON.parse(localStorage.getItem('usuario_pwa'));
+    if (usuarioGuardado) {
+        actualizarInterfaz(usuarioGuardado);
+    }
+};
+
+// Función para actualizar la interfaz
+function actualizarInterfaz(usuario) {
+    const contenedorLogin = document.getElementById('contenedor-login');
+    const contenedorUsuario = document.getElementById('contenedor-usuario');
+
+    if (usuario && usuario.logged) {
+        // Mostrar datos del usuario
+        contenedorLogin.style.display = 'none';
+        contenedorUsuario.style.display = 'flex';
+        document.getElementById('nombre-usuario').innerText = usuario.nombre;
+        document.getElementById('foto-usuario').src = usuario.foto;
+    } else {
+        // Mostrar botón de login
+        contenedorLogin.style.display = 'block';
+        contenedorUsuario.style.display = 'none';
+    }
+}
+
+// Modifica tu callback de éxito
+function manejarRespuestaGoogle(response) {
+    const payload = parseJwt(response.credential);
+    
+    const usuario = {
+        nombre: payload.name,
+        foto: payload.picture,
+        logged: true
+    };
+
+    localStorage.setItem('usuario_pwa', JSON.stringify(usuario));
+    actualizarInterfaz(usuario);
+}
+
+// Función para Cerrar Sesión
+window.cerrarSesion = function() {
+    localStorage.removeItem('usuario_pwa');
+    google.accounts.id.disableAutoSelect(); // Evita que loguee solo al recargar
+    actualizarInterfaz(null);
+    location.reload(); // Opcional: recargar para limpiar estado del juego
 };
