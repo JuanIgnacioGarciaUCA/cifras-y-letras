@@ -306,7 +306,7 @@ function obtenerSubconjuntos(array) {
 }*/
 
 
-export function resolver1(target, listaNumeros, n, tiempoLimiteSegundos=17) {
+export function resolver1(target, listaNumeros, n, tiempoLimiteSegundos=10) {
     let contador=0;
     const inicio = Date.now();
     const limiteMs = tiempoLimiteSegundos * 1000;
@@ -349,14 +349,14 @@ export function resolver1(target, listaNumeros, n, tiempoLimiteSegundos=17) {
                 }
                 // --- CHEQUEO DE TIEMPO ---
                 if (Date.now() - inicio > limiteMs) {
-                  console.warn(`Tiempo agotado. Devolviendo soluciones encontradas hasta ahora. Soluciones exploradas ${contador} en ${tiempoLimiteSegundos} segundos.`);
-
+                  console.warn(`Tiempo agotado. Devolviendo soluciones encontradas hasta ahora. Soluciones exploradas ${contador} en ${Date.now() - inicio} segundos.`);
+                  alert(`Tiempo agotado, ${Date.now() - inicio}, soluciones exploradas ${contador}.`);
                   return Array.from(soluciones);
                 }
                 contador++;
             }
         }
     }
-    console.log(`Tiempo empleado ${Date.now() - inicio}, soluciones exploradas ${contador}.`);
+    alert(`Tiempo empleado ${Date.now() - inicio}, soluciones exploradas ${contador}.`);
     return Array.from(soluciones);
 }

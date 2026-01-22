@@ -34,13 +34,43 @@ const sol1=document.getElementById("sol1");
 const sol2=document.getElementById("sol2");
 const sol3=document.getElementById("sol3");
 const sol4=document.getElementById("sol4");
+const sol5=document.getElementById("sol5");
 const linksol1=document.getElementById("linksol1");
 const linksol2=document.getElementById("linksol2");
 const linksol3=document.getElementById("linksol3");
 const linksol4=document.getElementById("linksol4");
+const linksol5=document.getElementById("linksol5");
 
+const sol1normal=document.getElementById("sol1normal");
+const sol2normal=document.getElementById("sol2normal");
+const sol3normal=document.getElementById("sol3normal");
+const sol4normal=document.getElementById("sol4normal");
+const sol5normal=document.getElementById("sol5normal");
+const linksol1normal=document.getElementById("linksol1normal");
+const linksol2normal=document.getElementById("linksol2normal");
+const linksol3normal=document.getElementById("linksol3normal");
+const linksol4normal=document.getElementById("linksol4normal");
+const linksol5normal=document.getElementById("linksol5normal");
+
+let solsnormal=[sol1normal,sol2normal,sol3normal,sol4normal,sol5normal];
+let lssnormal=[linksol1normal,linksol2normal,linksol3normal,linksol4normal,linksol5normal];
+
+let sols=[sol1,sol2,sol3,sol4,sol5];
+let lss=[linksol1,linksol2,linksol3,linksol4,linksol5];
 
 function borrarTodo(){
+  
+  for(let i=0;i<5;i++){
+    console.log("borrando sol ",i);
+    sols[i].innerHTML='';
+    lss[i].innerHTML='';
+  }
+
+  for(let i=0;i<solsnormal.length;i++){
+    solsnormal[i].innerHTML="";
+    lssnormal[i].innerHTML=""
+  }
+
   nIUsados=[false,false,false,false,false,false];
   for(let i=0;i<6;i++){
     let nI=document.getElementById("n"+(i+1));
@@ -167,11 +197,16 @@ comprobarPalabraBtn.addEventListener('click', () => {
 // botón encontrar palabra más larga
 palabrasolucion.addEventListener('click', () => {
   import('./letras.js').then(({ verificarPalabra }) => {
-    const propuesta=encontrarPalabrasMasLargas(letras);
+    const propuesta=encontrarPalabrasMasLargas(letras,5);
     if(propuesta!=null){
-      palabrasolucion.innerHTML=`<a href="https://dle.rae.es/${propuesta}">${propuesta}</a>`;
+      for(let i=0;i<propuesta.length;i++){
+        console.log("propuesta ",i,": ",propuesta[i]);
+        solsnormal[i].innerHTML=propuesta[i];
+        lssnormal[i].innerHTML=`<a href="https://dle.rae.es/${propuesta[i]}">${propuesta[i]}</a>`;
+      }
+      
     }else{
-      palabrasolucion.value="no hay propuesta";
+      palabrasolucion.innerHTML="no hay propuesta";
     }
   });
 });
@@ -247,7 +282,7 @@ comprobarSolucion.addEventListener('click', () => {
 
 
 //////////////////////////////////////////////////
-// Código para la versión TV
+// Letras para la versión TV
 //////////////////////////////////////////////
 
 
@@ -273,15 +308,23 @@ tvl10.addEventListener('input', () => {
 
 palabrasolucionTV.addEventListener('click', () => {
   import('./letras.js').then(({ verificarPalabra }) => {
+    //let sols=[sol1,sol2,sol3,sol4,sol5];
+    //let lss=[linksol1,linksol2,linksol3,linksol4,linksol5];
+    for(let i=0;i<5;i++){
+      console.log("borrando sol ",i);
+      sols[i].innerHTML='';
+      lss[i].innerHTML='';
+    }
     const letrasTV=[];
     for(let i=1;i<=10;i++){
       let letrai=document.getElementById("tvl"+i);
       letrasTV.push(letrai.value.trim().toLowerCase());
     }
     console.log("letrasTV=",letrasTV);
-    const propuesta=encontrarPalabrasMasLargas(letrasTV);
-    let sols=[sol1,sol2,sol3,sol4];
-    let lss=[linksol1,linksol2,linksol3,linksol4];
+    const propuesta=encontrarPalabrasMasLargas(letrasTV,5);
+    console.log("propuesta=",propuesta);
+    //let sols=[sol1,sol2,sol3,sol4,sol5];
+    //let lss=[linksol1,linksol2,linksol3,linksol4,linksol5];
     if(propuesta!=[]){
       for(let i=0;i<propuesta.length;i++){
         sols[i].innerHTML=propuesta[i];
