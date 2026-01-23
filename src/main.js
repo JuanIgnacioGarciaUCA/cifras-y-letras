@@ -563,6 +563,7 @@ window.onload = function () {
     const sesionGuardada = localStorage.getItem('usuario_identificado');
     if (sesionGuardada) {
         mostrarPerfilUsuario(JSON.parse(sesionGuardada));
+        console.log(sesionGuardada);
     }
 };
 
@@ -584,6 +585,7 @@ import {
   getFirestore, 
   collection,      // <--- ¡Faltaba este!
   query,           // <--- ¡Faltaba este!
+  where,
   orderBy,         // <--- ¡Faltaba este!
   limit,           // <--- ¡Faltaba este!
   getDocs          // <--- ¡Faltaba este!
@@ -613,15 +615,15 @@ const db = getFirestore(app);
 // FUNCIÓN PARA GUARDAR PUNTUACIÓN
 async function guardarPuntuacionGlobal(puntos) {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
+    
     if (!usuario) return;
     try {
-        await addDoc(collection(db, "rankings"), {
+        await addDoc(collection(db, "conexiones"), {
             nombre: usuario.name,
             foto: usuario.picture,
-            puntos: puntos,
             fecha: new Date()
         });
-        console.log("¡Récord guardado en la nube!");
+        console.log("Registro insertado");
     } catch (e) {
         console.error("Error al guardar: ", e);
     }
@@ -631,9 +633,10 @@ async function guardarPuntuacionGlobal(puntos) {
 export async function obtenerRanking() {
     try {
         // Creamos la referencia a la colección
-        const colRef = collection(db, "rankings");
+        const colRef = collection(db, "conexiones");
         // Construimos la consulta
-        const q = query(colRef, orderBy("puntos", "desc"), limit(10));
+        //const q = query(colRef, orderBy("puntos", "desc"), limit(10));
+        const q=query(collection(db, "conexiones"),where(),limit(1));
         // Ejecutamos la consulta
         const querySnapshot = await getDocs(q);
         const listaRanking = [];
