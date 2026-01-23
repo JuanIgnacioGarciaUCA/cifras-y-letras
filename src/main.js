@@ -620,10 +620,10 @@ async function guardarConexionUsuario(puntos) {
     try {
         console.log("datos del usuario",usuario);
         await addDoc(collection(db, "conexiones"), {
-            uid: user.aud,
-            nombre: user.displayName,
-            correo: user.email,
-            foto: user.photoURL,
+            aid: usuario.aud,
+            nombre: usuario.displayName,
+            correo: usuario.email,
+            foto: usuario.photoURL,
             ultimaConexion: new Date(),
             rol: "cliente"
         });
@@ -634,7 +634,7 @@ async function guardarConexionUsuario(puntos) {
 }
 
 // FUNCIÓN PARA OBTENER EL TOP 10
-export async function obtenerRanking() {
+export async function obtenerDatosConexion() {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     try {
         // Creamos la referencia a la colección
@@ -655,6 +655,6 @@ export async function obtenerRanking() {
     }
 }
 
-console.log("Obteniendo ranking global...");
+console.log("Guardando datos de conexión");
 guardarPuntuacionGlobal(100);
-//obtenerRanking();
+obtenerDatosConexion();
