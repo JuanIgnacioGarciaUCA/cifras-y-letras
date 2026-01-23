@@ -641,10 +641,16 @@ export async function obtenerDatosConexion() {
       orderBy("ultimaConexion", "desc"),
       limit(1)
     );
+    const q2 = query(
+      collection(db, "conexiones"),
+      where("correo", "==", usuario.email),
+      orderBy("ultimaConexion","desc"),
+      limit(10)
+    );
     console.log(usuario.email);
     try {
         // Ejecutamos la consulta
-        const querySnapshot = await getDocs(q1);
+        const querySnapshot = await getDocs(q2);
         const r = [];
         querySnapshot.forEach((doc) => {
             r.push(doc.data());
