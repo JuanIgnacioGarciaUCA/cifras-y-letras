@@ -648,5 +648,5 @@ export async function obtenerRanking() {
 }
 
 console.log("Obteniendo ranking global...");
-//guardarPuntuacionGlobal(100);
-obtenerRanking();
+guardarPuntuacionGlobal(100);
+//obtenerRanking();
