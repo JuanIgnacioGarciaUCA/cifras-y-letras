@@ -2,7 +2,8 @@
 import { CifrasGame, resolver1, ArbolBOp, NodoExpresion, obtenerPermutaciones } from './cifras.js';
 import { generarLetrasAleatorias, esPalabraValida, encontrarPalabrasMasLargas } from './letras.js';
 const version = import.meta.env.APP_VERSION;
-document.getElementById('version-display').innerText = `Versión: ${version}`;
+const versionDisplay = document.getElementById('version-display');
+versionDisplay.innerText = `Versión: ${version}`;
 console.log(version);
 
 let mode = 'Cifras';
@@ -652,6 +653,7 @@ export async function obtenerDatosConexion() {
         console.log("Datos obtenidos:", r);
         //console.log("Datos",querySnapshot);
         console.log(r[0]["ultimaConexion"].toDate());
+        versionDisplay.innerText = `Versión: ${version} - Última conexión: ${r[0]["ultimaConexion"].toDate().toLocaleString()}`;
         return r;
     } catch (error) {
         console.error("Error al conectase a la base de datos:", error);
