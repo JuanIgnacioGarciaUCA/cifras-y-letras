@@ -635,13 +635,14 @@ async function guardarConexionUsuario() {
 // FUNCIÓN PARA OBTENER EL TOP 10
 export async function obtenerDatosConexion() {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
+    const q = query(
+      collection(db, "conexiones"),
+      where("email", "==", usuario.email), // Usando UID que es lo estándar
+      orderBy("ultimaConexion", "desc"),
+      limit(1)
+    );
+    console.log(usuario.email);
     try {
-        // Creamos la referencia a la colección
-        const colRef = collection(db, "conexiones");
-        // Construimos la consulta
-        //const q = query(colRef, orderBy("puntos", "desc"), limit(10));
-        console.log(usuario.email);
-        const q=query(collection(db, "conexiones"),where("email","==",usuario.email),orderBy("ultimaConexion","desc"),limit(1));
         // Ejecutamos la consulta
         const querySnapshot = await getDocs(q);
         const r = [];
@@ -649,6 +650,7 @@ export async function obtenerDatosConexion() {
             r.push(doc.data());
         });
         console.log("Datos obtenidos:", r);
+        console.log("Datos",querySnapshot);
         return r;
     } catch (error) {
         console.error("Error al conectase a la base de datos:", error);
