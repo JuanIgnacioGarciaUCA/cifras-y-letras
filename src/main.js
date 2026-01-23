@@ -579,6 +579,14 @@ window.cerrarSesion = function() {
 console.log("Inicializando Firebase");
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { 
+  getFirestore, 
+  collection,      // <--- ¡Faltaba este!
+  query,           // <--- ¡Faltaba este!
+  orderBy,         // <--- ¡Faltaba este!
+  limit,           // <--- ¡Faltaba este!
+  getDocs          // <--- ¡Faltaba este!
+} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -619,12 +627,28 @@ async function guardarPuntuacionGlobal(puntos) {
 }
 
 // FUNCIÓN PARA OBTENER EL TOP 10
-async function obtenerRanking() {
-    const q = query(collection(db, "rankings"), orderBy("puntos", "desc"), limit(10));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.data().nombre}: ${doc.data().puntos}`);
-    });
+export async function obtenerRanking() {
+    try {
+        // Creamos la referencia a la colección
+        const colRef = collection(db, "rankings");
+
+        // Construimos la consulta
+        const q = query(colRef, orderBy("puntos", "desc"), limit(10));
+
+        // Ejecutamos la consulta
+        const querySnapshot = await getDocs(q);
+        
+        const listaRanking = [];
+        querySnapshot.forEach((doc) => {
+            listaRanking.push(doc.data());
+        });
+
+        console.log("Ranking obtenido:", listaRanking);
+        return listaRanking;
+
+    } catch (error) {
+        console.error("Error al obtener el ranking:", error);
+    }
 }
 
 console.log("Obteniendo ranking global...");
