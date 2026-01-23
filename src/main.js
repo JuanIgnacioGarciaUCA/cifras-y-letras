@@ -613,7 +613,7 @@ const db = getFirestore(app);
 
 
 // FUNCIÓN PARA GUARDAR PUNTUACIÓN
-async function guardarConexionUsuario(puntos) {
+async function guardarConexionUsuario() {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     
     if (!usuario) return;
@@ -656,5 +656,5 @@ export async function obtenerDatosConexion() {
 }
 
 console.log("Guardando datos de conexión");
-guardarPuntuacionGlobal(100);
+guardarConexionUsuario();
 obtenerDatosConexion();
