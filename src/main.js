@@ -620,7 +620,6 @@ async function guardarConexionUsuario() {
     try {
         console.log("datos del usuario",usuario);
         await addDoc(collection(db, "conexiones"), {
-            aud: usuario.aud,
             nombre: usuario.name,
             correo: usuario.email,
             foto: usuario.picture,
@@ -641,7 +640,7 @@ export async function obtenerDatosConexion() {
         const colRef = collection(db, "conexiones");
         // Construimos la consulta
         //const q = query(colRef, orderBy("puntos", "desc"), limit(10));
-        const q=query(collection(db, "conexiones"),where("aud","==",usuario.aud),orderBy("ultimaConexion","desc"),limit(1));
+        const q=query(collection(db, "conexiones"),where("aud","==",usuario.email),orderBy("ultimaConexion","desc"),limit(1));
         // Ejecutamos la consulta
         const querySnapshot = await getDocs(q);
         const r = [];
