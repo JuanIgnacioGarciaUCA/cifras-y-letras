@@ -649,7 +649,7 @@ export async function obtenerDatosConexion() {
     console.log(usuario.email);
     try {
         // Ejecutamos la consulta
-        const querySnapshot = await getDocs(q1);
+        const querySnapshot = await getDocs(q2);
         const r = [];
         querySnapshot.forEach((doc) => {
             r.push(doc.data());
