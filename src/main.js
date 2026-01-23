@@ -637,19 +637,14 @@ export async function obtenerDatosConexion() {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     const q1 = query(
       collection(db, "conexiones"),
-      where("email", "==", usuario.email), 
+      where("correo", "==", usuario.email), 
       orderBy("ultimaConexion", "desc"),
       limit(1)
-    );
-    const q2 = query(
-      collection(db, "conexiones"),
-      orderBy("ultimaConexion","desc"),
-      limit(10)
     );
     console.log(usuario.email);
     try {
         // Ejecutamos la consulta
-        const querySnapshot = await getDocs(q2);
+        const querySnapshot = await getDocs(q1);
         const r = [];
         querySnapshot.forEach((doc) => {
             r.push(doc.data());
