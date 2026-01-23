@@ -627,5 +627,5 @@ async function obtenerRanking() {
     });
 }
 
+console.log("Obteniendo ranking global...");
 obtenerRanking();
-let x=77;
