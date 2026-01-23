@@ -613,15 +613,18 @@ const db = getFirestore(app);
 
 
 // FUNCIÓN PARA GUARDAR PUNTUACIÓN
-async function guardarPuntuacionGlobal(puntos) {
+async function guardarConexionUsuario(puntos) {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     
     if (!usuario) return;
     try {
         await addDoc(collection(db, "conexiones"), {
-            nombre: usuario.name,
-            foto: usuario.picture,
-            fecha: new Date()
+            uid: user.uid,
+            nombre: user.displayName,
+            correo: user.email,
+            foto: user.photoURL,
+            ultimaConexion: new Date(),
+            rol: "cliente"
         });
         console.log("Registro insertado");
     } catch (e) {
@@ -631,22 +634,23 @@ async function guardarPuntuacionGlobal(puntos) {
 
 // FUNCIÓN PARA OBTENER EL TOP 10
 export async function obtenerRanking() {
+    const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     try {
         // Creamos la referencia a la colección
         const colRef = collection(db, "conexiones");
         // Construimos la consulta
         //const q = query(colRef, orderBy("puntos", "desc"), limit(10));
-        const q=query(collection(db, "conexiones"),where(),limit(1));
+        const q=query(collection(db, "conexiones"),where("uid","=",usuario.uid),orderBy("ultimaConexion","desc"),limit(1));
         // Ejecutamos la consulta
         const querySnapshot = await getDocs(q);
-        const listaRanking = [];
+        const r = [];
         querySnapshot.forEach((doc) => {
-            listaRanking.push(doc.data());
+            r.push(doc.data());
         });
-        console.log("Ranking obtenido:", listaRanking);
-        return listaRanking;
+        console.log("Datos obtenidos:", r);
+        return r;
     } catch (error) {
-        console.error("Error al obtener el ranking:", error);
+        console.error("Error al conectase a la base de datos:", error);
     }
 }
 
