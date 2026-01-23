@@ -621,7 +621,7 @@ async function guardarConexionUsuario() {
         console.log("datos del usuario",usuario);
         await addDoc(collection(db, "conexiones"), {
             aud: usuario.aud,
-            nombre: usuario.given_name,
+            nombre: usuario.name,
             correo: usuario.email,
             foto: usuario.picture,
             ultimaConexion: new Date(),
