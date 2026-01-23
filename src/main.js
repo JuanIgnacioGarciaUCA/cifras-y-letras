@@ -627,4 +627,5 @@ async function obtenerRanking() {
     });
 }
 
+obtenerRanking();
 let x=77;
