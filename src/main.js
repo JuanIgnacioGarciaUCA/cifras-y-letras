@@ -641,12 +641,6 @@ export async function obtenerDatosConexion() {
       orderBy("ultimaConexion", "desc"),
       limit(1)
     );
-    const q2 = query(
-      collection(db, "conexiones"),
-      where("correo", "==", usuario.email),
-      orderBy("ultimaConexion","desc"),
-      limit(10)
-    );
     console.log(usuario.email);
     try {
         // Ejecutamos la consulta
@@ -657,6 +651,7 @@ export async function obtenerDatosConexion() {
         });
         console.log("Datos obtenidos:", r);
         //console.log("Datos",querySnapshot);
+        console.log(r[0]["ultimaConexion"].toDate());
         return r;
     } catch (error) {
         console.error("Error al conectase a la base de datos:", error);
