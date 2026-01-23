@@ -614,7 +614,6 @@ const db = getFirestore(app);
 async function guardarPuntuacionGlobal(puntos) {
     const usuario = JSON.parse(localStorage.getItem('usuario_identificado'));
     if (!usuario) return;
-
     try {
         await addDoc(collection(db, "rankings"), {
             nombre: usuario.name,
@@ -633,26 +632,21 @@ export async function obtenerRanking() {
     try {
         // Creamos la referencia a la colección
         const colRef = collection(db, "rankings");
-
         // Construimos la consulta
         const q = query(colRef, orderBy("puntos", "desc"), limit(10));
-
         // Ejecutamos la consulta
         const querySnapshot = await getDocs(q);
-        
         const listaRanking = [];
         querySnapshot.forEach((doc) => {
             listaRanking.push(doc.data());
         });
-
         console.log("Ranking obtenido:", listaRanking);
         return listaRanking;
-
     } catch (error) {
         console.error("Error al obtener el ranking:", error);
     }
 }
 
 console.log("Obteniendo ranking global...");
-guardarPuntuacionGlobal(100);
+//guardarPuntuacionGlobal(100);
 obtenerRanking();
