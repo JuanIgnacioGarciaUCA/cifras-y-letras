@@ -618,8 +618,9 @@ async function guardarConexionUsuario(puntos) {
     
     if (!usuario) return;
     try {
+        console.log("datos del usuario",usuario);
         await addDoc(collection(db, "conexiones"), {
-            uid: user.uid,
+            uid: user.aud,
             nombre: user.displayName,
             correo: user.email,
             foto: user.photoURL,
