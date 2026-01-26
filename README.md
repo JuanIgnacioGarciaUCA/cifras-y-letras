@@ -1,1 +1,1 @@
-# cifras-y-letras
+Go to [https://juanignaciogarciauca.github.io/cifras-y-letras/](https://juanignaciogarciauca.github.io/cifras-y-letras/) to play.
