@@ -17,8 +17,6 @@ letrasSection.style.display = 'none';
 letrasSectionTV.style.display = 'none';
 cifrasSectionTV.style.display = 'none';
 
-//const modeButton = document.getElementById('mode-button');
-//const modeButtonTV = document.getElementById('mode-TV');
 const palabraInput = document.getElementById('palabrausuario');
 const nuevasLetras = document.getElementById('nuevasLetras');
 const numvocales = document.getElementById('numvocales');
@@ -134,11 +132,9 @@ function cambiaBloquesVisibles(){
     if (mode === 'Letras') {
       letrasSectionTV.style.display = 'block';
       cifrasSectionTV.style.display = 'none';
-      modeButton.textContent = 'Cambiar a Cifras';
     } else {
       letrasSectionTV.style.display = 'none';
       cifrasSectionTV.style.display = 'block';
-      modeButton.textContent = 'Cambiar a Letras';
     }
     letrasSection.style.display = 'none';
     cifrasSection.style.display = 'none';
@@ -146,39 +142,19 @@ function cambiaBloquesVisibles(){
         if (mode === 'Letras') {
       letrasSection.style.display = 'block';
       cifrasSection.style.display = 'none';
-      modeButton.textContent = 'Cambiar a Cifras';
     } else {
       letrasSection.style.display = 'none';
       cifrasSection.style.display = 'block';
-      modeButton.textContent = 'Cambiar a Letras';
     }
     letrasSectionTV.style.display = 'none';
     cifrasSectionTV.style.display = 'none';
   }
 }
 
-// botón de modo de juego
-/*modeButtonTV.addEventListener('click', () => {
-  if(modeTV){
-    modeTV=false;
-  }else{
-    modeTV=true;
-  }
-  cambiaBloquesVisibles();
-});
-
-// botón de modo de juego
-modeButton.addEventListener('click', () => {
-  if (mode === 'Letras') {
-    mode = 'Cifras';
-  } else {
-    mode = 'Letras';
-  }
-  cambiaBloquesVisibles();
-});*/
-
-
+//////////////////
 // botón pedir letras
+
+
 nuevasLetras.disabled=true;
 numvocales.addEventListener('change', () => {
   console.log("numvocales="+numvocales.value);
